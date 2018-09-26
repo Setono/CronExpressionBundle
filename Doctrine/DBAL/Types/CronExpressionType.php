@@ -9,7 +9,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 
 class CronExpressionType extends Type
 {
-    const CRON_EXPRESSION_TYPE = 'cron_expression'; // modify to match your type name
+    const CRON_EXPRESSION_TYPE = 'cron_expression';
 
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
