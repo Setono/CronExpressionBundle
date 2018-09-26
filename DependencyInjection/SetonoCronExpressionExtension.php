@@ -24,13 +24,13 @@ final class SetonoCronExpressionExtension extends Extension implements PrependEx
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @throws \Exception
      */
     public function prepend(ContainerBuilder $container)
     {
-        if(!$container->hasExtension('doctrine')) {
+        if (!$container->hasExtension('doctrine')) {
             throw new \Exception('The doctrine extension was not loaded');
         }
 
@@ -39,10 +39,10 @@ final class SetonoCronExpressionExtension extends Extension implements PrependEx
                 'mappings' => [
                     'SetonoCronExpressionBundle' => [
                         'type' => 'xml',
-                        'prefix' => 'Cron'
-                    ]
-                ]
-            ]
+                        'prefix' => 'Cron',
+                    ],
+                ],
+            ],
         ]);
     }
 }
