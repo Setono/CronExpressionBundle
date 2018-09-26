@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Setono\CronExpressionBundle\Doctrine\DBAL\Types;
@@ -11,14 +12,26 @@ class CronExpressionType extends Type
 {
     const CRON_EXPRESSION_TYPE = 'cron_expression';
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
-        return $platform->getClobTypeDeclarationSQL($fieldDeclaration);
+        return $platform->getVarcharTypeDeclarationSQL($fieldDeclaration);
     }
 
     /**
-     * @param string $value
+     * {@inheritdoc}
+     */
+    public function getDefaultLength(AbstractPlatform $platform)
+    {
+        return $platform->getVarcharDefaultLength();
+    }
+
+    /**
+     * @param string           $value
      * @param AbstractPlatform $platform
+     *
      * @return CronExpression
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
@@ -27,13 +40,14 @@ class CronExpressionType extends Type
     }
 
     /**
-     * @param CronExpression $value
+     * @param CronExpression   $value
      * @param AbstractPlatform $platform
+     *
      * @return string
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        return (string)$value;
+        return (string) $value;
     }
 
     public function getName()

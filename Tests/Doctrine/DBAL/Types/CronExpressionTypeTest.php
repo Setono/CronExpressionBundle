@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Setono\CronExpressionBundle\Tests\Doctrine\DBAL\Types;
@@ -24,13 +25,12 @@ final class CronExpressionTypeTest extends TestCase
 
     protected function setUp()
     {
-        if(!Type::hasType('cron_expression')) {
+        if (!Type::hasType('cron_expression')) {
             Type::addType('cron_expression', CronExpressionType::class);
         }
 
         $this->type = Type::getType('cron_expression');
         $this->platform = $this->getPlatform();
-
     }
 
     /**
