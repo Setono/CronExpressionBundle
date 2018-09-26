@@ -11,7 +11,7 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 class CronExpressionToPartsTransformer implements DataTransformerInterface
 {
     /**
-     * @param CronExpression $cronExpression
+     * @param CronExpression|null $cronExpression
      * @return array
      */
     public function transform($cronExpression)
@@ -31,16 +31,16 @@ class CronExpressionToPartsTransformer implements DataTransformerInterface
         }
 
         return [
-            'minutes' => $cronExpression->getExpression(CronExpression::MINUTE),
-            'hours' => $cronExpression->getExpression(CronExpression::HOUR),
-            'days' => $cronExpression->getExpression(CronExpression::DAY),
-            'months' => $cronExpression->getExpression(CronExpression::MONTH),
-            'weekdays' => $cronExpression->getExpression(CronExpression::WEEKDAY),
+            'minutes' => $cronExpression->getExpression((string) CronExpression::MINUTE),
+            'hours' => $cronExpression->getExpression((string) CronExpression::HOUR),
+            'days' => $cronExpression->getExpression((string) CronExpression::DAY),
+            'months' => $cronExpression->getExpression((string) CronExpression::MONTH),
+            'weekdays' => $cronExpression->getExpression((string) CronExpression::WEEKDAY),
         ];
     }
 
     /**
-     * @param array $array
+     * @param array|null $array
      * @return CronExpression
      */
     public function reverseTransform($array)
