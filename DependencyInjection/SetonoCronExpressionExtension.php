@@ -15,8 +15,6 @@ final class SetonoCronExpressionExtension extends Extension implements PrependEx
 {
     /**
      * {@inheritdoc}
-     *
-     * @throws \Exception
      */
     public function load(array $config, ContainerBuilder $container): void
     {
