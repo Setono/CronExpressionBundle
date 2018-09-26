@@ -37,7 +37,7 @@ final class SetonoCronExpressionExtension extends Extension implements PrependEx
             'dbal' => [
                 'types' => [
                     'cron_expression' => CronExpressionType::class,
-                ]
+                ],
             ],
         ]);
     }
