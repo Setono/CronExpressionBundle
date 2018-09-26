@@ -11,7 +11,8 @@
     ],
     "require": {
         "php": "^7.1",
-
+        "doctrine/orm": "^2.6",
+        "dragonmantank/cron-expression": "^2.2",
         "symfony/config": "^3.4|^4.1",
         "symfony/dependency-injection": "^3.4|^4.1"
     },
@@ -39,8 +40,8 @@
     },
     "scripts": {
         "test": "./bin/phpunit",
-        "check-style": "./bin/ecs check DependencyInjection/ Tests/",
-        "fix-style": "./bin/ecs check --fix DependencyInjection/ Tests/",
+        "check-style": "./bin/ecs check DependencyInjection/",
+        "fix-style": "./bin/ecs check --fix DependencyInjection/",
         "analyse": "./bin/phpstan analyse -c phpstan.neon -l max"
     }
 }
