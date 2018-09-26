@@ -14,7 +14,8 @@
         "doctrine/orm": "^2.6",
         "dragonmantank/cron-expression": "^2.2",
         "symfony/config": "^3.4|^4.1",
-        "symfony/dependency-injection": "^3.4|^4.1"
+        "symfony/dependency-injection": "^3.4|^4.1",
+        "symfony/form": "^3.4|^4.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.10.3",
