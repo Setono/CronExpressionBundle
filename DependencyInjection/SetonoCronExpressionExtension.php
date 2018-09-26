@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\CronExpressionBundle\DependencyInjection;
 
+use Setono\CronExpressionBundle\Doctrine\DBAL\Types\CronExpressionType;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -35,12 +36,9 @@ final class SetonoCronExpressionExtension extends Extension implements PrependEx
         }
 
         $container->prependExtensionConfig('doctrine', [
-            'orm' => [
-                'mappings' => [
-                    'SetonoCronExpressionBundle' => [
-                        'type' => 'xml',
-                        'prefix' => 'Cron',
-                    ],
+            'dbal' => [
+                'types' => [
+                    'cron_expression' => CronExpressionType::class,
                 ],
             ],
         ]);
