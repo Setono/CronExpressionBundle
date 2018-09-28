@@ -40,8 +40,8 @@
     },
     "scripts": {
         "test": "./bin/phpunit",
-        "check-style": "./bin/ecs check DependencyInjection/ Doctrine/ Tests/",
-        "fix-style": "./bin/ecs check --fix DependencyInjection/ Doctrine/ Tests/",
+        "check-style": "./bin/ecs check DependencyInjection/ Doctrine/ Form/ Tests/",
+        "fix-style": "./bin/ecs check --fix DependencyInjection/ Doctrine/ Form/ Tests/",
         "analyse": "./bin/phpstan analyse -c phpstan.neon -l max"
     }
 }

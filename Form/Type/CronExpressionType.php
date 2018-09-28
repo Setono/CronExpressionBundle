@@ -11,33 +11,37 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class CronExpressionType extends AbstractType
 {
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $days = range(0, 31);
-        unset($days[0]);
-
-        $months = range(0, 12);
-        unset($months[0]);
-
-        $weekdays = range(0, 7);
-        unset($weekdays[0]);
-
         $builder
             ->addViewTransformer(new CronExpressionToPartsTransformer())
             ->add('minutes', ChoiceType::class, [
                 'choices' => range(0, 59),
+                'multiple' => true,
+                'required' => false,
             ])
             ->add('hours', ChoiceType::class, [
                 'choices' => range(0, 23),
+                'multiple' => true,
+                'required' => false,
             ])
-            ->add('days',ChoiceType::class, [
-                'choices' => $days,
+            ->add('days', ChoiceType::class, [
+                'choices' => $this->oneIndexedRange(31),
+                'multiple' => true,
+                'required' => false,
             ])
-            ->add('months',ChoiceType::class, [
-                'choices' => $months,
+            ->add('months', ChoiceType::class, [
+                'choices' => $this->oneIndexedRange(12),
+                'multiple' => true,
+                'required' => false,
             ])
-            ->add('weekdays',ChoiceType::class, [
-                'choices' => $weekdays,
+            ->add('weekdays', ChoiceType::class, [
+                'choices' => $this->oneIndexedRange(7),
+                'multiple' => true,
+                'required' => false,
             ])
         ;
     }
@@ -48,5 +52,22 @@ class CronExpressionType extends AbstractType
     public function getBlockPrefix()
     {
         return 'setono_cron_expression';
+    }
+
+    /**
+     * Will create an array where the first key is 1
+     * oneIndexedRange(3) will return [1 => 1, 2 => 2, 3 => 3].
+     *
+     * @param $end
+     * @param int $start
+     *
+     * @return array
+     */
+    private function oneIndexedRange($end, $start = 0): array
+    {
+        $arr = range($start, $end);
+        unset($arr[0]);
+
+        return $arr;
     }
 }

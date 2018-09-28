@@ -12,17 +12,18 @@ class CronExpressionToPartsTransformer implements DataTransformerInterface
 {
     /**
      * @param CronExpression|null $cronExpression
+     *
      * @return array
      */
     public function transform($cronExpression)
     {
-        if(null === $cronExpression) {
+        if (null === $cronExpression) {
             return [
-                'minutes' => '*',
-                'hours' => '*',
-                'days' => '*',
-                'months' => '*',
-                'weekdays' => '*',
+                'minutes' => ['*'],
+                'hours' => ['*'],
+                'days' => ['*'],
+                'months' => ['*'],
+                'weekdays' => ['*'],
             ];
         }
 
@@ -31,34 +32,51 @@ class CronExpressionToPartsTransformer implements DataTransformerInterface
         }
 
         return [
-            'minutes' => $cronExpression->getExpression((string) CronExpression::MINUTE),
-            'hours' => $cronExpression->getExpression((string) CronExpression::HOUR),
-            'days' => $cronExpression->getExpression((string) CronExpression::DAY),
-            'months' => $cronExpression->getExpression((string) CronExpression::MONTH),
-            'weekdays' => $cronExpression->getExpression((string) CronExpression::WEEKDAY),
+            'minutes' => $this->convertCronString($cronExpression->getExpression((string) CronExpression::MINUTE)),
+            'hours' => $this->convertCronString($cronExpression->getExpression((string) CronExpression::HOUR)),
+            'days' => $this->convertCronString($cronExpression->getExpression((string) CronExpression::DAY)),
+            'months' => $this->convertCronString($cronExpression->getExpression((string) CronExpression::MONTH)),
+            'weekdays' => $this->convertCronString($cronExpression->getExpression((string) CronExpression::WEEKDAY)),
         ];
     }
 
     /**
      * @param array|null $array
+     *
      * @return CronExpression
      */
     public function reverseTransform($array)
     {
         $cronExpression = CronExpression::factory('* * * * *');
 
-        if(null === $array) {
+        if (null === $array) {
             return $cronExpression;
         }
 
         $cronExpression
-            ->setPart(CronExpression::MINUTE, $array['minutes'])
-            ->setPart(CronExpression::HOUR, $array['hours'])
-            ->setPart(CronExpression::DAY, $array['days'])
-            ->setPart(CronExpression::MONTH, $array['months'])
-            ->setPart(CronExpression::WEEKDAY, $array['weekdays'])
+            ->setPart(CronExpression::MINUTE, $this->convertCronParts($array['minutes']))
+            ->setPart(CronExpression::HOUR, $this->convertCronParts($array['hours']))
+            ->setPart(CronExpression::DAY, $this->convertCronParts($array['days']))
+            ->setPart(CronExpression::MONTH, $this->convertCronParts($array['months']))
+            ->setPart(CronExpression::WEEKDAY, $this->convertCronParts($array['weekdays']))
         ;
 
         return $cronExpression;
+    }
+
+    private function convertCronParts(array $cronArray): string
+    {
+        $cronString = join(',', $cronArray);
+
+        return $cronString ?: '*';
+    }
+
+    private function convertCronString(string $cronString): array
+    {
+        if ('*' === $cronString) {
+            return [];
+        }
+
+        return explode(',', $cronString);
     }
 }
