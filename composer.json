@@ -35,13 +35,12 @@
         }
     },
     "config": {
-        "bin-dir": "bin",
         "sort-packages": true
     },
     "scripts": {
-        "test": "./bin/phpunit",
-        "check-style": "./bin/ecs check DependencyInjection/ Doctrine/ Form/ Tests/",
-        "fix-style": "./bin/ecs check --fix DependencyInjection/ Doctrine/ Form/ Tests/",
-        "analyse": "./bin/phpstan analyse -c phpstan.neon -l max"
+        "test": "./vendor/bin/phpunit",
+        "check-style": "./vendor/bin/ecs check DependencyInjection/ Doctrine/ Form/ Tests/",
+        "fix-style": "./vendor/bin/ecs check --fix DependencyInjection/ Doctrine/ Form/ Tests/",
+        "analyse": "./vendor/bin/phpstan analyse -c phpstan.neon -l max"
     }
 }

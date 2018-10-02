@@ -58,12 +58,12 @@ class CronExpressionType extends AbstractType
      * Will create an array where the first key is 1
      * oneIndexedRange(3) will return [1 => 1, 2 => 2, 3 => 3].
      *
-     * @param $end
+     * @param int $end
      * @param int $start
      *
      * @return array
      */
-    private function oneIndexedRange($end, $start = 0): array
+    private function oneIndexedRange(int $end, int $start = 0): array
     {
         $arr = range($start, $end);
         unset($arr[0]);
