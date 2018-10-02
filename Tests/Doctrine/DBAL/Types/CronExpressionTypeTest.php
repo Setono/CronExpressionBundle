@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Setono\CronExpressionBundle\Tests\Doctrine\DBAL\Types;
 
 use Cron\CronExpression;
+use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -23,6 +24,9 @@ final class CronExpressionTypeTest extends TestCase
      */
     private $platform;
 
+    /**
+     * @throws DBALException
+     */
     protected function setUp()
     {
         if (!Type::hasType('cron_expression')) {

@@ -14,7 +14,7 @@
          stopOnFailure="false">
     <testsuites>
         <testsuite name="SetonoCronExpressionBundle Test Suite">
-            <directory>tests</directory>
+            <directory>Tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

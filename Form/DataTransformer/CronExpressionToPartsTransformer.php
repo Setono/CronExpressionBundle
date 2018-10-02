@@ -68,7 +68,7 @@ class CronExpressionToPartsTransformer implements DataTransformerInterface
     {
         $cronString = join(',', $cronArray);
 
-        return $cronString ?: '*';
+        return '' !== $cronString ? $cronString : '*';
     }
 
     private function convertCronString(string $cronString): array
