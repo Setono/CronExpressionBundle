@@ -20,7 +20,68 @@ This command requires you to have Composer installed globally, as explained in t
 
 ### Step 2: Enable the bundle
 
-Will be enabled by default when you use Symfony Flex.
+If you use Symfony Flex it will be enabled automatically. Else you need to add it to the `bundles.php`.
+
+```php
+<?php
+// config/bundles.php
+
+return [
+    // ...
+    Setono\CronExpressionBundle\SetonoCronExpressionBundle::class => ['all' => true],
+    // ...
+];
+```
+
+# Step 3: Add to form type
+```php
+<?php
+// src/Form/TaskType.php
+
+namespace App\Form;
+
+use Setono\CronExpressionBundle\Form\Type\CronExpressionType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+class TaskType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('task')
+            ->add('schedule', CronExpressionType::class)
+            ->add('save', SubmitType::class)
+        ;
+    }
+}
+```
+
+# Step 4: Add to entity
+```php
+<?php
+// src/Entity/Task.php
+
+namespace App\Entity;
+
+use Cron\CronExpression;
+use Doctrine\ORM\Mapping as ORM;
+
+class Task
+{
+    // ...
+    
+    /**
+     * @var CronExpression
+     * 
+     * @ORM\Column(type="cron_expression") 
+     */
+    protected $schedule;
+    
+    // ...
+}
+```
 
 [ico-version]: https://img.shields.io/packagist/v/setono/cron-expression-bundle.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
