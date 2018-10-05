@@ -24,7 +24,7 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
 
         $reflectionProperty = $reflectionClass->getProperty($property);
 
-        if (false === $reflectionProperty->getDocComment()) {
+        if (is_bool($reflectionProperty->getDocComment())) {
             return null;
         }
 
