@@ -11,13 +11,17 @@
     ],
     "require": {
         "php": "^7.1",
+        "brick/reflection": "~0.2.1",
+        "doctrine/doctrine-bundle": "^1.9",
         "doctrine/orm": "^2.6",
         "dragonmantank/cron-expression": "^2.2",
+        "phpdocumentor/reflection-docblock": "^4.3",
         "symfony/config": "^3.4|^4.1",
         "symfony/dependency-injection": "^3.4|^4.1",
         "symfony/form": "^3.4|^4.1"
     },
     "require-dev": {
+        "matthiasnoback/symfony-dependency-injection-test": "^3.0",
         "phpstan/phpstan": "^0.10.3",
         "phpunit/phpunit": "^7",
         "symplify/easy-coding-standard": "^4.6"
