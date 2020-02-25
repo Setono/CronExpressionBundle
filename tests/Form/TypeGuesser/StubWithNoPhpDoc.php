@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\CronExpressionBundle\Tests\Form\TypeGuesser;
 
-final class Stub
+final class StubWithNoPhpDoc
 {
-    /** @var \Cron\CronExpression */
     private $property;
 }
