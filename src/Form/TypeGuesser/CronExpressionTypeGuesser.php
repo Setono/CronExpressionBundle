@@ -20,8 +20,10 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
     /**
      * @param string $class
      * @param string $property
+     *
+     * @return TypeGuess|null
      */
-    public function guessType($class, $property): ?TypeGuess
+    public function guessType($class, $property)
     {
         if (!class_exists($class)) {
             return null;
@@ -57,8 +59,10 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
     /**
      * @param string $class
      * @param string $property
+     *
+     * @return ValueGuess|null
      */
-    public function guessRequired($class, $property): ?ValueGuess
+    public function guessRequired($class, $property)
     {
         return null;
     }
@@ -66,8 +70,10 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
     /**
      * @param string $class
      * @param string $property
+     *
+     * @return ValueGuess|null
      */
-    public function guessMaxLength($class, $property): ?ValueGuess
+    public function guessMaxLength($class, $property)
     {
         return null;
     }
@@ -75,8 +81,10 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
     /**
      * @param string $class
      * @param string $property
+     *
+     * @return ValueGuess|null
      */
-    public function guessPattern($class, $property): ?ValueGuess
+    public function guessPattern($class, $property)
     {
         return null;
     }
