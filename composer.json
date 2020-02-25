@@ -14,9 +14,9 @@
         "brick/reflection": "^0.3",
         "doctrine/doctrine-bundle": "^1.9 || ^2.0",
         "dragonmantank/cron-expression": "^2.2",
-        "symfony/config": "^3.4 || ^4.1 || ^5.0",
-        "symfony/dependency-injection": "^3.4 || ^4.1.12 || ^5.0",
-        "symfony/form": "^3.4 || ^4.1 || ^5.0"
+        "symfony/config": "^4.4 || ^5.0",
+        "symfony/dependency-injection": "^4.4 || ^5.0",
+        "symfony/form": "^4.4 || ^5.0"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.2",
