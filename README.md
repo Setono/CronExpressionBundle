@@ -34,7 +34,9 @@ return [
 ];
 ```
 
-# Step 3: Add to form type
+## Usage
+
+### Add to form type
 ```php
 <?php
 // src/Form/TaskType.php
@@ -59,7 +61,7 @@ class TaskType extends AbstractType
 }
 ```
 
-# Step 4: Add to entity
+### Add to entity
 ```php
 <?php
 // src/Entity/Task.php
@@ -78,7 +80,7 @@ class Task
      * 
      * @ORM\Column(type="cron_expression") 
      */
-    protected $schedule;
+    private $schedule;
     
     // ...
 }
