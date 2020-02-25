@@ -1,9 +1,10 @@
 # Cron Expression Bundle
 Symfony bundle that integrates [dragonmantank/cron-expression](https://github.com/dragonmantank/cron-expression)
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Latest Version][ico-version]][link-packagist]
+[![Latest Unstable Version][ico-unstable-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
-[![Build Status][ico-travis]][link-travis]
+[![Build Status][ico-github-actions]][link-github-actions]
 [![Quality Score][ico-code-quality]][link-code-quality]
 
 ## Installation
@@ -83,11 +84,12 @@ class Task
 }
 ```
 
-[ico-version]: https://img.shields.io/packagist/v/setono/cron-expression-bundle.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/Setono/CronExpressionBundle/master.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/CronExpressionBundle.svg?style=flat-square
+[ico-version]: https://poser.pugx.org/setono/cron-expression-bundle/v/stable
+[ico-unstable-version]: https://poser.pugx.org/setono/cron-expression-bundle/v/unstable
+[ico-license]: https://poser.pugx.org/setono/cron-expression-bundle/license
+[ico-github-actions]: https://github.com/Setono/CronExpressionBundle/workflows/Build/badge.svg
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/CronExpressionBundle.svg
 
-[link-packagist]: https://packagist.org/packages/setono/cron-expression
-[link-travis]: https://travis-ci.org/Setono/CronExpressionBundle
+[link-packagist]: https://packagist.org/packages/setono/cron-expression-bundle
+[link-github-actions]: https://github.com/Setono/CronExpressionBundle/actions
 [link-code-quality]: https://scrutinizer-ci.com/g/Setono/CronExpressionBundle
