@@ -33,7 +33,5 @@ jobs:
                 run: composer check-style
             -   name: Static analysis
                 run: composer analyse
-            -   name: Run phpspec
-                run: composer phpspec
             -   name: Run phpunit
                 run: composer phpunit
