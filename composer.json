@@ -54,7 +54,6 @@
         "fix-style": "vendor/bin/ecs check --fix src/ tests/",
         "phpunit": "vendor/bin/phpunit",
         "tests": [
-            "@phpspec",
             "@phpunit"
         ]
     }
