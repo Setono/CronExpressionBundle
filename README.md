@@ -87,7 +87,7 @@ class Task
 [ico-version]: https://poser.pugx.org/setono/cron-expression-bundle/v/stable
 [ico-unstable-version]: https://poser.pugx.org/setono/cron-expression-bundle/v/unstable
 [ico-license]: https://poser.pugx.org/setono/cron-expression-bundle/license
-[ico-github-actions]: https://github.com/Setono/CronExpressionBundle/workflows/Build/badge.svg
+[ico-github-actions]: https://github.com/Setono/CronExpressionBundle/workflows/build/badge.svg
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/CronExpressionBundle.svg
 
 [link-packagist]: https://packagist.org/packages/setono/cron-expression-bundle
