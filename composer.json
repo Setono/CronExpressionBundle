@@ -10,40 +10,53 @@
         }
     ],
     "require": {
-        "php": "^7.1",
-        "brick/reflection": "~0.2.1",
+        "php": "^7.2",
+        "brick/reflection": "^0.3",
         "doctrine/doctrine-bundle": "^1.9",
         "dragonmantank/cron-expression": "^2.2",
-        "phpdocumentor/reflection-docblock": "^4.3",
-        "symfony/config": "^3.4|^4.1",
-        "symfony/dependency-injection": "^3.4|^4.1",
-        "symfony/form": "^3.4|^4.1"
+        "symfony/config": "^3.4 || ^4.1 || ^5.0",
+        "symfony/dependency-injection": "^3.4 || ^4.1 || ^5.0",
+        "symfony/form": "^3.4 || ^4.1 || ^5.0"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^3.0",
-        "phpstan/phpstan": "^0.10.3",
-        "phpunit/phpunit": "^7",
-        "symplify/easy-coding-standard": "^5.0"
+        "ergebnis/composer-normalize": "^2.2",
+        "korbeil/phpstan-generic-rules": "^0.2.4",
+        "matthiasnoback/symfony-config-test": "^4.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.0",
+        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-strict-rules": "^0.12.2",
+        "phpunit/phpunit": "^8.5",
+        "roave/security-advisories": "dev-master",
+        "sylius-labs/coding-standard": "^3.1",
+        "thecodingmachine/phpstan-safe-rule": "^1.0"
     },
-    "prefer-stable": true,
-    "autoload": {
-        "psr-4": {
-            "Setono\\CronExpressionBundle\\": ""
-        },
-        "exclude-from-classmap": [ "/Tests/" ]
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
         }
     },
-    "config": {
-        "sort-packages": true
+    "autoload": {
+        "psr-4": {
+            "Setono\\CronExpressionBundle\\": "src/"
+        }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Setono\\CronExpressionBundle\\Tests\\": "tests/"
+        }
+    },
+    "prefer-stable": true,
     "scripts": {
-        "test": "./vendor/bin/phpunit",
-        "check-style": "./vendor/bin/ecs check DependencyInjection/ Doctrine/ Form/ Tests/",
-        "fix-style": "./vendor/bin/ecs check --fix DependencyInjection/ Doctrine/ Form/ Tests/",
-        "analyse": "./vendor/bin/phpstan analyse -c phpstan.neon -l max"
+        "analyse": "vendor/bin/phpstan analyse -c phpstan.neon -l max src/",
+        "check-style": "vendor/bin/ecs check src/ tests/",
+        "fix-style": "vendor/bin/ecs check --fix src/ tests/",
+        "phpunit": "vendor/bin/phpunit",
+        "tests": [
+            "@phpspec",
+            "@phpunit"
+        ]
     }
 }
