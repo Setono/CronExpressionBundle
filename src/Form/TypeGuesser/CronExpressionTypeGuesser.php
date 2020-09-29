@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\CronExpressionBundle\Form\TypeGuesser;
 
-use Brick\Reflection\ImportResolver;
 use Brick\Reflection\ReflectionTools;
 use Cron\CronExpression;
 use ReflectionClass;
@@ -37,18 +36,8 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
         $reflectionTools = new ReflectionTools();
         $propertyTypes = $reflectionTools->getPropertyTypes($reflectionProperty);
 
-        if (count($propertyTypes) === 0) {
-            return null;
-        }
-
-        $resolver = new ImportResolver($reflectionClass);
-
-        foreach ($propertyTypes as $propertyType) {
-            $fqn = $resolver->resolve($propertyType);
-
-            if (CronExpression::class === $fqn) {
-                return new TypeGuess(CronExpressionType::class, [], Guess::VERY_HIGH_CONFIDENCE);
-            }
+        if (in_array(CronExpression::class, $propertyTypes, true)) {
+            return new TypeGuess(CronExpressionType::class, [], Guess::VERY_HIGH_CONFIDENCE);
         }
 
         return null;
