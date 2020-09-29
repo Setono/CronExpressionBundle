@@ -30,11 +30,11 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
         }
 
         return [
-            'minutes' => $this->convertCronString($cronExpression->getExpression((string) CronExpression::MINUTE)),
-            'hours' => $this->convertCronString($cronExpression->getExpression((string) CronExpression::HOUR)),
-            'days' => $this->convertCronString($cronExpression->getExpression((string) CronExpression::DAY)),
-            'months' => $this->convertCronString($cronExpression->getExpression((string) CronExpression::MONTH)),
-            'weekdays' => $this->convertCronString($cronExpression->getExpression((string) CronExpression::WEEKDAY)),
+            'minutes' => $this->convertCronString((string) $cronExpression->getExpression((string) CronExpression::MINUTE)),
+            'hours' => $this->convertCronString((string) $cronExpression->getExpression((string) CronExpression::HOUR)),
+            'days' => $this->convertCronString((string) $cronExpression->getExpression((string) CronExpression::DAY)),
+            'months' => $this->convertCronString((string) $cronExpression->getExpression((string) CronExpression::MONTH)),
+            'weekdays' => $this->convertCronString((string) $cronExpression->getExpression((string) CronExpression::WEEKDAY)),
         ];
     }
 

@@ -1,15 +1,3 @@
-includes:
-	- vendor/korbeil/phpstan-generic-rules/extension.neon
-	- vendor/phpstan/phpstan-strict-rules/rules.neon
-	- vendor/thecodingmachine/phpstan-safe-rule/phpstan-safe-rule.neon
-
 parameters:
     reportUnmatchedIgnoredErrors: true
     checkMissingIterableValueType: false
-
-    excludes_analyse:
-        # Makes PHPStan crash
-        - 'DependencyInjection/Configuration.php'
-
-    ignoreErrors:
-        - '/Parameter #1 $configuration of method Symfony\Component\DependencyInjection\Extension\Extension::processConfiguration() expects Symfony\Component\Config\Definition\ConfigurationInterface, Symfony\Component\Config\Definition\ConfigurationInterface|null given./'
