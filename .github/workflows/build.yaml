@@ -21,12 +21,13 @@ jobs:
                 composer-args: ['--prefer-lowest --prefer-stable', '']
         steps:
             -   name: Checkout
-                uses: actions/checkout@v1
+                uses: actions/checkout@v2
             -   name: Setup PHP, with composer and extensions
-                uses: shivammathur/setup-php@master
+                uses: shivammathur/setup-php@v2
                 with:
                     php-version: ${{ matrix.php-versions }}
-                    extension-csv: intl
+                    extensions: intl
+                    coverage: none
             -   name: Install Composer dependencies
                 run: composer update --no-progress --no-suggest --prefer-dist --no-interaction ${{ matrix.composer-args }}
             -   name: Validate composer
