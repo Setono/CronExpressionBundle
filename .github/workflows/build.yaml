@@ -6,14 +6,16 @@ on:
         - cron: 5 8 * * 3
 jobs:
     checks:
-        name: 'PHP ${{ matrix.php-versions }} on ${{ matrix.operating-system }} with composer args: ${{ matrix.composer-args }}'
-        runs-on: ${{ matrix.operating-system }}
+        name: 'PHP ${{ matrix.php-versions }} with composer args: ${{ matrix.composer-args }}'
+        runs-on: ubuntu-latest
         strategy:
             fail-fast: false
             max-parallel: 3
             matrix:
                 operating-system: [ubuntu-latest]
-                php-versions: ['7.2', '7.3', '7.4']
+                php-versions:
+                    - '7.3'
+                    - '7.4'
                 composer-args: ['--prefer-lowest --prefer-stable', '']
         steps:
             -   name: Checkout
