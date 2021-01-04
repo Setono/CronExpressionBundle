@@ -13,7 +13,7 @@
         "php": "^7.3 || ^8.0",
         "brick/reflection": "^0.4",
         "doctrine/doctrine-bundle": "^1.9 || ^2.0",
-        "dragonmantank/cron-expression": "^2.2",
+        "dragonmantank/cron-expression": "^3.1",
         "symfony/config": "^4.4 || ^5.0",
         "symfony/dependency-injection": "^4.4 || ^5.0",
         "symfony/form": "^4.4 || ^5.0"
