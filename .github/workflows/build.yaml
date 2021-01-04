@@ -10,6 +10,7 @@ jobs:
     checks:
         name: 'PHP ${{ matrix.php-versions }} with composer args: ${{ matrix.composer-args }}'
         runs-on: ubuntu-latest
+        continue-on-error: ${{ matrix.experimental }}
         strategy:
             fail-fast: false
             max-parallel: 3
@@ -19,6 +20,10 @@ jobs:
                     - '7.3'
                     - '7.4'
                 composer-args: ['--prefer-lowest --prefer-stable', '']
+                experimental: [false]
+                include:
+                  - php-versions: '8.0'
+                    experimental: true
         steps:
             -   name: Checkout
                 uses: actions/checkout@v2
