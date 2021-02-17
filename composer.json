@@ -20,7 +20,7 @@
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^4.0",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^9.5",
         "setono/code-quality-pack": "^1.4"
     },
     "config": {
