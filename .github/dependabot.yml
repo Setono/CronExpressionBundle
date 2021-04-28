@@ -1,0 +1,15 @@
+version: 2
+updates:
+- package-ecosystem: composer
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: setono/code-quality-pack
+    versions:
+    - 2.0.0
+  - dependency-name: dragonmantank/cron-expression
+    versions:
+    - 3.1.0
