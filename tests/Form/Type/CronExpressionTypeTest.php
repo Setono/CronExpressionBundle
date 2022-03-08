@@ -6,6 +6,8 @@ namespace Setono\CronExpressionBundle\Tests\Form\Type;
 
 use Cron\CronExpression;
 use Setono\CronExpressionBundle\Form\Type\CronExpressionType;
+use stdClass;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Test\TypeTestCase;
 
 class CronExpressionTypeTest extends TypeTestCase
@@ -77,5 +79,16 @@ class CronExpressionTypeTest extends TypeTestCase
 
         $this->assertInstanceOf(CronExpression::class, $cronExpression);
         $this->assertSame($expected, $cronExpression->getExpression());
+    }
+
+    /**
+     * @test
+     */
+    public function createWithFaultyData(): void
+    {
+        $data = new stdClass();
+
+        $this->expectException(TransformationFailedException::class);
+        $this->factory->create(CronExpressionType::class, $data);
     }
 }
