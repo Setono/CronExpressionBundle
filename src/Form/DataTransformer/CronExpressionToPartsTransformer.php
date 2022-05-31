@@ -66,15 +66,18 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
             throw $exception;
         }
 
-        $cronExpression
-            ->setPart(CronExpression::MINUTE, $this->convertCronParts($value['minutes']))
-            ->setPart(CronExpression::HOUR, $this->convertCronParts($value['hours']))
-            ->setPart(CronExpression::DAY, $this->convertCronParts($value['days']))
-            ->setPart(CronExpression::MONTH, $this->convertCronParts($value['months']))
-            ->setPart(CronExpression::WEEKDAY, $this->convertCronParts($value['weekdays']))
-        ;
+        try {
+            $cronExpression
+                ->setPart(CronExpression::MINUTE, $this->convertCronParts($value['minutes']))
+                ->setPart(CronExpression::HOUR, $this->convertCronParts($value['hours']))
+                ->setPart(CronExpression::DAY, $this->convertCronParts($value['days']))
+                ->setPart(CronExpression::MONTH, $this->convertCronParts($value['months']))
+                ->setPart(CronExpression::WEEKDAY, $this->convertCronParts($value['weekdays']));
 
-        return $cronExpression;
+            return $cronExpression;
+        } catch (\InvalidArgumentException $e) {
+            throw $exception;
+        }
     }
 
     private function convertCronParts(array $cronArray): string
