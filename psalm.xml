@@ -16,4 +16,21 @@
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
     </plugins>
+    <issueHandlers>
+        <DeprecatedMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="Cron\CronExpression::factory"/>
+            </errorLevel>
+        </DeprecatedMethod>
+        <MissingConstructor>
+            <errorLevel type="suppress">
+                <directory name="tests/Form/TypeGuesser"/>
+            </errorLevel>
+        </MissingConstructor>
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <directory name="src/Validator"/>
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+    </issueHandlers>
 </psalm>

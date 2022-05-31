@@ -11,11 +11,11 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 final class CronExpressionToPartsTransformer implements DataTransformerInterface
 {
     /**
-     * @param mixed $cronExpression
+     * @param mixed $value
      */
-    public function transform($cronExpression): array
+    public function transform($value): array
     {
-        if (null === $cronExpression) {
+        if (null === $value) {
             return [
                 'minutes' => ['*'],
                 'hours' => ['*'],
@@ -25,40 +25,40 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
             ];
         }
 
-        if (!$cronExpression instanceof CronExpression) {
+        if (!$value instanceof CronExpression) {
             throw new TransformationFailedException('Expected an instance of ' . CronExpression::class);
         }
 
         return [
-            'minutes' => $this->convertCronString((string) $cronExpression->getExpression((string) CronExpression::MINUTE)),
-            'hours' => $this->convertCronString((string) $cronExpression->getExpression((string) CronExpression::HOUR)),
-            'days' => $this->convertCronString((string) $cronExpression->getExpression((string) CronExpression::DAY)),
-            'months' => $this->convertCronString((string) $cronExpression->getExpression((string) CronExpression::MONTH)),
-            'weekdays' => $this->convertCronString((string) $cronExpression->getExpression((string) CronExpression::WEEKDAY)),
+            'minutes' => $this->convertCronString((string) $value->getExpression((string) CronExpression::MINUTE)),
+            'hours' => $this->convertCronString((string) $value->getExpression((string) CronExpression::HOUR)),
+            'days' => $this->convertCronString((string) $value->getExpression((string) CronExpression::DAY)),
+            'months' => $this->convertCronString((string) $value->getExpression((string) CronExpression::MONTH)),
+            'weekdays' => $this->convertCronString((string) $value->getExpression((string) CronExpression::WEEKDAY)),
         ];
     }
 
     /**
-     * @param mixed $array
+     * @param mixed $value
      */
-    public function reverseTransform($array): CronExpression
+    public function reverseTransform($value): CronExpression
     {
         $cronExpression = CronExpression::factory('* * * * *');
 
-        if (null === $array) {
+        if (null === $value) {
             return $cronExpression;
         }
 
-        if (!is_array($array)) {
+        if (!is_array($value)) {
             throw new TransformationFailedException('Expected an instance of array');
         }
 
         $cronExpression
-            ->setPart(CronExpression::MINUTE, $this->convertCronParts($array['minutes']))
-            ->setPart(CronExpression::HOUR, $this->convertCronParts($array['hours']))
-            ->setPart(CronExpression::DAY, $this->convertCronParts($array['days']))
-            ->setPart(CronExpression::MONTH, $this->convertCronParts($array['months']))
-            ->setPart(CronExpression::WEEKDAY, $this->convertCronParts($array['weekdays']))
+            ->setPart(CronExpression::MINUTE, $this->convertCronParts($value['minutes']))
+            ->setPart(CronExpression::HOUR, $this->convertCronParts($value['hours']))
+            ->setPart(CronExpression::DAY, $this->convertCronParts($value['days']))
+            ->setPart(CronExpression::MONTH, $this->convertCronParts($value['months']))
+            ->setPart(CronExpression::WEEKDAY, $this->convertCronParts($value['weekdays']))
         ;
 
         return $cronExpression;

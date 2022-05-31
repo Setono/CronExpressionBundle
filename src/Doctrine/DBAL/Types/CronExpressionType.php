@@ -12,14 +12,9 @@ final class CronExpressionType extends Type
 {
     public const CRON_EXPRESSION_TYPE = 'cron_expression';
 
-    public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
+    public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
-        return $platform->getVarcharTypeDeclarationSQL($fieldDeclaration);
-    }
-
-    public function getDefaultLength(AbstractPlatform $platform): int
-    {
-        return $platform->getVarcharDefaultLength();
+        return $platform->getVarcharTypeDeclarationSQL($column);
     }
 
     /**

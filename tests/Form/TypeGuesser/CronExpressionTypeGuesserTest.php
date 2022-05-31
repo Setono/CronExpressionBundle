@@ -12,8 +12,7 @@ use Symfony\Component\Form\Guess\TypeGuess;
 
 final class CronExpressionTypeGuesserTest extends TestCase
 {
-    /** @var CronExpressionTypeGuesser */
-    private $typeGuesser;
+    private CronExpressionTypeGuesser $typeGuesser;
 
     public function setUp(): void
     {
@@ -58,6 +57,14 @@ final class CronExpressionTypeGuesserTest extends TestCase
     public function it_guesses_type_when_type_is_imported(): void
     {
         $this->assertCorrectGuess($this->typeGuesser->guessType(StubImported::class, 'property'));
+    }
+
+    /**
+     * @test
+     */
+    public function it_guesses_type_when_type_is_hinted(): void
+    {
+        $this->assertCorrectGuess($this->typeGuesser->guessType(StubWithTypeHint::class, 'property'));
     }
 
     private function assertCorrectGuess(?TypeGuess $res): void

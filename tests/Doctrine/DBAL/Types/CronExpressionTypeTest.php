@@ -5,40 +5,22 @@ declare(strict_types=1);
 namespace Setono\CronExpressionBundle\Tests\Doctrine\DBAL\Types;
 
 use Cron\CronExpression;
-use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Setono\CronExpressionBundle\Doctrine\DBAL\Types\CronExpressionType;
 
 final class CronExpressionTypeTest extends TestCase
 {
-    /** @var Type */
-    private $type;
-
-    /** @var AbstractPlatform */
-    private $platform;
-
-    /**
-     * @throws DBALException
-     */
-    protected function setUp(): void
-    {
-        if (!Type::hasType('cron_expression')) {
-            Type::addType('cron_expression', CronExpressionType::class);
-        }
-
-        $this->type = Type::getType('cron_expression');
-        $this->platform = $this->getPlatform();
-    }
+    use ProphecyTrait;
 
     /**
      * @test
      */
     public function convertToPhpReturnsCronExpression(): void
     {
-        $val = $this->type->convertToPHPValue('@daily', $this->platform);
+        $val = $this->getType()->convertToPHPValue('@daily', $this->getPlatform());
 
         $this->assertInstanceOf(CronExpression::class, $val);
     }
@@ -48,16 +30,25 @@ final class CronExpressionTypeTest extends TestCase
      */
     public function convertToDatabaseReturnsString(): void
     {
-        $val = $this->type->convertToDatabaseValue(CronExpression::factory('@daily'), $this->platform);
+        $val = $this->getType()->convertToDatabaseValue(CronExpression::factory('@daily'), $this->getPlatform());
 
         $this->assertIsString('string', $val);
     }
 
-    /**
-     * @return MockObject|AbstractPlatform
-     */
-    private function getPlatform(): MockObject
+    private function getType(): CronExpressionType
     {
-        return $this->getMockBuilder(AbstractPlatform::class)->disableOriginalConstructor()->getMock();
+        if (!Type::hasType('cron_expression')) {
+            Type::addType('cron_expression', CronExpressionType::class);
+        }
+
+        /** @var CronExpressionType $type */
+        $type = Type::getType('cron_expression');
+
+        return $type;
+    }
+
+    private function getPlatform(): AbstractPlatform
+    {
+        return $this->prophesize(AbstractPlatform::class)->reveal();
     }
 }

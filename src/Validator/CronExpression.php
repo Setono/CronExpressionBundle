@@ -14,5 +14,5 @@ use Symfony\Component\Validator\Constraint;
 #[Attribute(Attribute::TARGET_PROPERTY | Attribute::TARGET_METHOD | Attribute::IS_REPEATABLE)]
 class CronExpression extends Constraint
 {
-    public $message = '{{ value }} is not a valid cron expression.';
+    public string $message = '{{ value }} is not a valid cron expression.';
 }

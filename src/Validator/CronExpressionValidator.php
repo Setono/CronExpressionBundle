@@ -12,7 +12,10 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 class CronExpressionValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint)
+    /**
+     * @param mixed $value
+     */
+    public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof CronExpression) {
             throw new UnexpectedTypeException($constraint, CronExpression::class);
@@ -21,6 +24,7 @@ class CronExpressionValidator extends ConstraintValidator
         if (null === $value || '' === $value) {
             return;
         }
+
         // if it is already a Cron Expression it is valid
         if ($value instanceof DragonCronExpression) {
             return;
