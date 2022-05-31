@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Setono\CronExpressionBundle\Validator;
 
 use Cron\CronExpression as DragonCronExpression;
-
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -11,7 +12,6 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 class CronExpressionValidator extends ConstraintValidator
 {
-
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof CronExpression) {
