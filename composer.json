@@ -1,8 +1,8 @@
 {
     "name": "setono/cron-expression-bundle",
-    "type": "symfony-bundle",
     "description": "Symfony bundle that integrates dragonmantank/cron-expression",
     "license": "MIT",
+    "type": "symfony-bundle",
     "authors": [
         {
             "name": "Joachim Løvgaard",
@@ -26,18 +26,7 @@
         "roave/security-advisories": "dev-latest",
         "setono/code-quality-pack": "^2.1.3"
     },
-    "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "ergebnis/composer-normalize": true,
-            "dealerdirect/phpcodesniffer-composer-installer": false
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.3-dev"
-        }
-    },
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Setono\\CronExpressionBundle\\": "src/"
@@ -48,7 +37,18 @@
             "Setono\\CronExpressionBundle\\Tests\\": "tests/"
         }
     },
-    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "dealerdirect/phpcodesniffer-composer-installer": false
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.3-dev"
+        }
+    },
     "scripts": {
         "analyse": "psalm",
         "check-style": "ecs check",
