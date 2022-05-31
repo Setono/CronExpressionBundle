@@ -6,6 +6,7 @@ namespace Setono\CronExpressionBundle\Doctrine\DBAL\Types;
 
 use Cron\CronExpression;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
 
 final class CronExpressionType extends Type
@@ -20,16 +21,36 @@ final class CronExpressionType extends Type
     /**
      * @param mixed $value
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform): CronExpression
+    public function convertToPHPValue($value, AbstractPlatform $platform): ?CronExpression
     {
-        return CronExpression::factory($value);
+        if (null === $value) {
+            return null;
+        }
+
+        if (!is_string($value)) {
+            throw ConversionException::conversionFailedInvalidType($value, CronExpression::class, ['string']);
+        }
+
+        if ('' === $value) {
+            return null;
+        }
+
+        try {
+            return CronExpression::factory($value);
+        } catch (\Throwable $e) {
+            throw ConversionException::conversionFailed($value, CronExpression::class, $e);
+        }
     }
 
     /**
      * @param mixed $value
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): string
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
+        if (null === $value) {
+            return null;
+        }
+
         return (string) $value;
     }
 
