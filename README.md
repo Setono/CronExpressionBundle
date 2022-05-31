@@ -62,27 +62,23 @@ class TaskType extends AbstractType
 ```
 
 ### Add to entity
+
 ```php
 <?php
-// src/Entity/Task.php
+
+declare(strict_types=1);
 
 namespace App\Entity;
 
 use Cron\CronExpression;
 use Doctrine\ORM\Mapping as ORM;
+use Setono\CronExpressionBundle\Doctrine\DBAL\Types\CronExpressionType;
 
+#[ORM\Entity]
 class Task
 {
-    // ...
-    
-    /**
-     * @var CronExpression
-     * 
-     * @ORM\Column(type="cron_expression") 
-     */
-    private $schedule;
-    
-    // ...
+    #[ORM\Column(type: CronExpressionType::CRON_EXPRESSION_TYPE)]
+    private CronExpression $schedule;
 }
 ```
 
