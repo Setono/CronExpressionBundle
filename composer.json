@@ -19,7 +19,8 @@
         "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
         "symfony/form": "^4.4 || ^5.4 || ^6.0",
         "symfony/http-kernel": "^4.4 || ^5.4 || ^6.0",
-        "symfony/validator": "^4.4 || ^5.4 || ^6.0"
+        "symfony/validator": "^4.4 || ^5.4 || ^6.0",
+        "webmozart/assert": "^1.10"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^4.3",
