@@ -22,7 +22,7 @@ final class CronExpressionTypeTest extends TestCase
     {
         $val = $this->getType()->convertToPHPValue('@daily', $this->getPlatform());
 
-        $this->assertInstanceOf(CronExpression::class, $val);
+        self::assertInstanceOf(CronExpression::class, $val);
     }
 
     /**
@@ -30,9 +30,9 @@ final class CronExpressionTypeTest extends TestCase
      */
     public function convertToDatabaseReturnsString(): void
     {
-        $val = $this->getType()->convertToDatabaseValue(CronExpression::factory('@daily'), $this->getPlatform());
+        $val = $this->getType()->convertToDatabaseValue(CronExpression::factory('0 0 * * *'), $this->getPlatform());
 
-        $this->assertIsString('string', $val);
+        self::assertSame('0 0 * * *', $val);
     }
 
     private function getType(): CronExpressionType

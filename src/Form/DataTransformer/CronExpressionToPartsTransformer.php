@@ -7,6 +7,7 @@ namespace Setono\CronExpressionBundle\Form\DataTransformer;
 use Cron\CronExpression;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+use Webmozart\Assert\Assert;
 
 final class CronExpressionToPartsTransformer implements DataTransformerInterface
 {
@@ -49,8 +50,20 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
             return $cronExpression;
         }
 
+        $exception = new TransformationFailedException('Expected an instance of array{minutes: array, hours: array, days: array, months: array, weekdays: array}');
+
         if (!is_array($value)) {
-            throw new TransformationFailedException('Expected an instance of array');
+            throw $exception;
+        }
+
+        if (!isset($value['minutes'], $value['hours'], $value['days'], $value['months'], $value['weekdays'])) {
+            throw $exception;
+        }
+
+        try {
+            Assert::allIsArray($value);
+        } catch (\InvalidArgumentException $e) {
+            throw $exception;
         }
 
         $cronExpression
@@ -66,9 +79,13 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
 
     private function convertCronParts(array $cronArray): string
     {
-        $cronString = implode(',', $cronArray);
+        if ([] === $cronArray) {
+            return '*';
+        }
 
-        return '' !== $cronString ? $cronString : '*';
+        Assert::allScalar($cronArray);
+
+        return implode(',', $cronArray);
     }
 
     private function convertCronString(string $cronString): array
