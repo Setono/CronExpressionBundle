@@ -70,9 +70,13 @@ class CronExpressionTest extends ConstraintValidatorTestCase
 
         $this->validator->validate($value, $constraint);
 
+        /** @psalm-suppress InternalMethod,MixedMethodCall */
         $this->buildViolation('myMessage')->setParameter('{{ value }}', $valueAsString)->assertRaised();
     }
 
+    /**
+     * @return list<array<array-key, mixed>>
+     */
     public function getInvalidValues(): array
     {
         return [
