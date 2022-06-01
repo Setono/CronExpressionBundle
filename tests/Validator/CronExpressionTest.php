@@ -60,12 +60,12 @@ class CronExpressionTest extends ConstraintValidatorTestCase
     }
 
     /**
-     *
      * @dataProvider getInvalidValues
-     * @param $value
-     * @param $valueAsString
+     *
+     * @param mixed $value
+     * @param string $valueAsString
      */
-    public function testInvalidValues($value, $valueAsString): void
+    public function testInvalidValues($value, string $valueAsString): void
     {
         $constraint = new Constraint(['message' => 'myMessage']);
 
@@ -74,6 +74,9 @@ class CronExpressionTest extends ConstraintValidatorTestCase
         $this->buildViolation('myMessage')->setParameter('{{ value }}', $valueAsString)->assertRaised();
     }
 
+    /**
+     * @return iterable<array<mixed, string>>
+     */
     public function getInvalidValues(): array
     {
         return [
