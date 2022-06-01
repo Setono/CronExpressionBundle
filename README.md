@@ -1,11 +1,12 @@
 # Cron Expression Bundle
-Symfony bundle that integrates [dragonmantank/cron-expression](https://github.com/dragonmantank/cron-expression)
 
 [![Latest Version][ico-version]][link-packagist]
 [![Latest Unstable Version][ico-unstable-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
 [![Build Status][ico-github-actions]][link-github-actions]
 [![Code Coverage][ico-code-coverage]][link-code-coverage]
+
+Symfony bundle that integrates [dragonmantank/cron-expression](https://github.com/dragonmantank/cron-expression)
 
 ## Installation
 
