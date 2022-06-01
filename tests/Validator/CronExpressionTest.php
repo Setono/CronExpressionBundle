@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Setono\CronExpressionBundle\Tests\Validator;
 
 use Cron\CronExpression;
@@ -13,45 +15,44 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 class CronExpressionTest extends ConstraintValidatorTestCase
 {
-
     protected function createValidator(): CronExpressionValidator
     {
         return new CronExpressionValidator();
     }
 
-    public function testNullIsValid()
+    public function testNullIsValid(): void
     {
         $this->validator->validate(null, new Constraint());
         $this->assertNoViolation();
     }
 
-    public function testEmptyIsValid()
+    public function testEmptyIsValid(): void
     {
         $this->validator->validate('', new Constraint());
         $this->assertNoViolation();
     }
 
-    public function testCronObjectIsValid()
+    public function testCronObjectIsValid(): void
     {
         $value = new CronExpression('* * * * *');
         $this->validator->validate($value, new Constraint());
         $this->assertNoViolation();
     }
 
-    public function testCronStringIsValid()
+    public function testCronStringIsValid(): void
     {
         $this->validator->validate('* * * * *', new Constraint());
         $this->assertNoViolation();
     }
 
-    public function testInvalidConstraint()
+    public function testInvalidConstraint(): void
     {
         $this->expectException(UnexpectedTypeException::class);
 
         $this->validator->validate('* * * * *', new NotNull());
     }
 
-    public function testExpectsStringCompatibleValue()
+    public function testExpectsStringCompatibleValue(): void
     {
         $this->expectException(UnexpectedValueException::class);
 
@@ -59,12 +60,12 @@ class CronExpressionTest extends ConstraintValidatorTestCase
     }
 
     /**
+     *
      * @dataProvider getInvalidValues
      * @param $value
      * @param $valueAsString
-     * @return void
      */
-    public function testInvalidValues($value, $valueAsString)
+    public function testInvalidValues($value, $valueAsString): void
     {
         $constraint = new Constraint(['message' => 'myMessage']);
 
@@ -80,7 +81,7 @@ class CronExpressionTest extends ConstraintValidatorTestCase
             ['*', '"*"'],
             ['* * * * * *', '"* * * * * *"'],
             ['61 * * * *', '"61 * * * *"'],
-            ['-1 * * * *', '"-1 * * * *"']
+            ['-1 * * * *', '"-1 * * * *"'],
         ];
     }
 }
