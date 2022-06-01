@@ -75,7 +75,7 @@ class CronExpressionTest extends ConstraintValidatorTestCase
     }
 
     /**
-     * @return list<array<array-key, int|string>>
+     * @psalm-return list<array{0: int|string, 1: string}>
      */
     public function getInvalidValues(): array
     {
