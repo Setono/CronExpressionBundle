@@ -34,7 +34,7 @@ class CronExpressionTest extends ConstraintValidatorTestCase
 
     public function testCronObjectIsValid(): void
     {
-        $value = new CronExpression('* * * * *', null);
+        $value = CronExpression::factory('* * * * *');
         $this->validator->validate($value, new Constraint());
         $this->assertNoViolation();
     }
