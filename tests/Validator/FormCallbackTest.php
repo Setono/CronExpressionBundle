@@ -25,19 +25,19 @@ class FormCallbackTest extends ConstraintValidatorTestCase
 
     public function testValidIsValid(): void
     {
-        $this->validator->validate("0", $this->createConstraint(CronExpression::MINUTE));
+        $this->validator->validate('0', $this->createConstraint(CronExpression::MINUTE));
         $this->assertNoViolation();
     }
 
     public function testOutOfRangeIsNotValid(): void
     {
-        $value = "61";
+        $value = '61';
         $this->validator->validate($value, $this->createConstraint(CronExpression::MINUTE));
         /** @psalm-suppress InternalMethod,MixedMethodCall */
         $this->buildViolation('{{value}} is not a valid cron part')->setParameter('value', $value)->assertRaised();
     }
 
-    protected function createConstraint($payload): Callback
+    protected function createConstraint(int $payload): Callback
     {
         // helper function for Symfony 4.4
         return new Callback([
