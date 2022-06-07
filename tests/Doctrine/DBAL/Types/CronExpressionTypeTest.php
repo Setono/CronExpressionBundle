@@ -147,9 +147,11 @@ final class CronExpressionTypeTest extends TestCase
         $mock = $this->createMock(AbstractPlatform::class);
         $mock->method('getVarcharTypeDeclarationSQL')
             ->withAnyParameters()
-            ->willReturnCallback(function ($column)
+            ->willReturnCallback(function (array $column)
         {
+            /** @var int $length */
             $length = $column['length'];
+            /** @var bool $fixed */
             $fixed = $column['fixed'] ?? false;
 
             return $fixed ? ($length > 0 ? 'CHAR(' . $length . ')' : 'CHAR(254)')
