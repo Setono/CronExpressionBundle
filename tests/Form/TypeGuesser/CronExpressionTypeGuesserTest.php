@@ -38,9 +38,17 @@ final class CronExpressionTypeGuesserTest extends TestCase
     /**
      * @test
      */
+    public function it_returns_null_if_property_doesnt_exist(): void
+    {
+        $this->assertNull($this->typeGuesser->guessType(StubWithNoPhpDoc::class, 'property2'));
+    }
+
+    /**
+     * @test
+     */
     public function it_guesses_type_when_type_is_a_fqcn(): void
     {
-        $this->assertCorrectGuess($this->typeGuesser->guessType(StubFqcn::class, 'property'));
+        $this->guess_type(StubFqcn::class);
     }
 
     /**
@@ -48,7 +56,7 @@ final class CronExpressionTypeGuesserTest extends TestCase
      */
     public function it_guesses_type_when_type_is_an_alias(): void
     {
-        $this->assertCorrectGuess($this->typeGuesser->guessType(StubAliased::class, 'property'));
+        $this->guess_type(StubAliased::class);
     }
 
     /**
@@ -56,7 +64,7 @@ final class CronExpressionTypeGuesserTest extends TestCase
      */
     public function it_guesses_type_when_type_is_imported(): void
     {
-        $this->assertCorrectGuess($this->typeGuesser->guessType(StubImported::class, 'property'));
+        $this->guess_type(StubImported::class);
     }
 
     /**
@@ -64,7 +72,15 @@ final class CronExpressionTypeGuesserTest extends TestCase
      */
     public function it_guesses_type_when_type_is_hinted(): void
     {
-        $this->assertCorrectGuess($this->typeGuesser->guessType(StubWithTypeHint::class, 'property'));
+        $this->guess_type(StubWithTypeHint::class);
+    }
+
+    protected function guess_type(string $klass): void
+    {
+        $this->assertCorrectGuess($this->typeGuesser->guessType($klass, 'property'));
+        $this->assertNull($this->typeGuesser->guessRequired($klass, 'property'));
+        $this->assertNull($this->typeGuesser->guessMaxLength($klass, 'property'));
+        $this->assertNull($this->typeGuesser->guessPattern($klass, 'property'));
     }
 
     private function assertCorrectGuess(?TypeGuess $res): void
