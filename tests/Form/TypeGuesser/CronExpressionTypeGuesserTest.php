@@ -75,12 +75,12 @@ final class CronExpressionTypeGuesserTest extends TestCase
         $this->guess_type(StubWithTypeHint::class);
     }
 
-    protected function guess_type(string $klass): void
+    protected function guess_type(string $class): void
     {
-        $this->assertCorrectGuess($this->typeGuesser->guessType($klass, 'property'));
-        $this->assertNull($this->typeGuesser->guessRequired($klass, 'property'));
-        $this->assertNull($this->typeGuesser->guessMaxLength($klass, 'property'));
-        $this->assertNull($this->typeGuesser->guessPattern($klass, 'property'));
+        $this->assertCorrectGuess($this->typeGuesser->guessType($class, 'property'));
+        $this->assertNull($this->typeGuesser->guessRequired($class, 'property'));
+        $this->assertNull($this->typeGuesser->guessMaxLength($class, 'property'));
+        $this->assertNull($this->typeGuesser->guessPattern($class, 'property'));
     }
 
     private function assertCorrectGuess(?TypeGuess $res): void
