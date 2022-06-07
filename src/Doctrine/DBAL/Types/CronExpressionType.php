@@ -20,6 +20,7 @@ final class CronExpressionType extends Type
 
     /**
      * @param mixed $value
+     * @throws ConversionException
      */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?CronExpression
     {

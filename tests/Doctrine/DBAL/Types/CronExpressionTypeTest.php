@@ -5,18 +5,75 @@ declare(strict_types=1);
 namespace Setono\CronExpressionBundle\Tests\Doctrine\DBAL\Types;
 
 use Cron\CronExpression;
+use Doctrine\DBAL\Exception as DbalException;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Setono\CronExpressionBundle\Doctrine\DBAL\Types\CronExpressionType;
+use stdClass;
 
 final class CronExpressionTypeTest extends TestCase
 {
-    use ProphecyTrait;
+    /**
+     * @test
+     * @throws DbalException
+     */
+    public function testTypeName(): void
+    {
+        self::assertEquals('cron_expression', $this->getType()->getName());
+    }
 
     /**
      * @test
+     * @throws DbalException
+     */
+    public function testTypeRequiresHint(): void
+    {
+        self::assertTrue($this->getType()->requiresSQLCommentHint($this->getPlatform()));
+    }
+
+    /**
+     * @test
+     * @throws DbalException
+     */
+    public function testTypeColumn(): void
+    {
+        $length = 255;
+        $sql = $this->getType()->getSQLDeclaration([
+            'length' => $length
+        ], $this->getPlatform());
+        self::assertStringContainsString(strval($length), $sql);
+    }
+
+    /**
+     * @test
+     * @throws DbalException
+     * @throws ConversionException
+     */
+    public function convertToPhpNull(): void
+    {
+        $val = $this->getType()->convertToPHPValue(null, $this->getPlatform());
+
+        self::assertNull($val);
+    }
+
+    /**
+     * @test
+     * @throws DbalException
+     * @throws ConversionException
+     */
+    public function convertEmptyToPhpNull(): void
+    {
+        $val = $this->getType()->convertToPHPValue('', $this->getPlatform());
+
+        self::assertNull($val);
+    }
+
+    /**
+     * @test
+     * @throws DbalException
+     * @throws ConversionException
      */
     public function convertToPhpReturnsCronExpression(): void
     {
@@ -27,6 +84,31 @@ final class CronExpressionTypeTest extends TestCase
 
     /**
      * @test
+     * @throws DbalException
+     * @throws ConversionException
+     */
+    public function convertFaultyTypeToPhpThrowsException(): void
+    {
+        self::expectException(ConversionException::class);
+
+        $this->getType()->convertToPHPValue(new stdClass(), $this->getPlatform());
+    }
+
+    /**
+     * @test
+     * @throws DbalException
+     * @throws ConversionException
+     */
+    public function convertFaultyStringToPhpThrowsException(): void
+    {
+        self::expectException(ConversionException::class);
+
+        $this->getType()->convertToPHPValue('@never', $this->getPlatform());
+    }
+
+    /**
+     * @test
+     * @throws DbalException
      */
     public function convertToDatabaseReturnsString(): void
     {
@@ -35,6 +117,19 @@ final class CronExpressionTypeTest extends TestCase
         self::assertSame('0 0 * * *', $val);
     }
 
+    /**
+     * @test
+     * @throws DbalException
+     */
+    public function convertToDatabaseNull(): void
+    {
+        $val = $this->getType()->convertToDatabaseValue(null, $this->getPlatform());
+        self::assertNull($val);
+    }
+
+    /**
+     * @throws DbalException
+     */
     private function getType(): CronExpressionType
     {
         if (!Type::hasType('cron_expression')) {
@@ -49,6 +144,17 @@ final class CronExpressionTypeTest extends TestCase
 
     private function getPlatform(): AbstractPlatform
     {
-        return $this->prophesize(AbstractPlatform::class)->reveal();
+        $mock = $this->createMock(AbstractPlatform::class);
+        $mock->method('getVarcharTypeDeclarationSQL')
+            ->withAnyParameters()
+            ->willReturnCallback(function ($column)
+        {
+            $length = $column['length'];
+            $fixed = $column['fixed'] ?? false;
+
+            return $fixed ? ($length > 0 ? 'CHAR(' . $length . ')' : 'CHAR(254)')
+                : ($length > 0 ? 'VARCHAR(' . $length . ')' : 'VARCHAR(255)');
+        });
+        return $mock;
     }
 }
