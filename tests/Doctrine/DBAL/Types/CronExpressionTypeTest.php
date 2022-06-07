@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Setono\CronExpressionBundle\Tests\Doctrine\DBAL\Types;
 
 use Cron\CronExpression;
-use Doctrine\DBAL\Exception as DbalException;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
@@ -17,7 +16,6 @@ final class CronExpressionTypeTest extends TestCase
 {
     /**
      * @test
-     * @throws DbalException
      */
     public function testTypeName(): void
     {
@@ -26,7 +24,6 @@ final class CronExpressionTypeTest extends TestCase
 
     /**
      * @test
-     * @throws DbalException
      */
     public function testTypeRequiresHint(): void
     {
@@ -35,7 +32,6 @@ final class CronExpressionTypeTest extends TestCase
 
     /**
      * @test
-     * @throws DbalException
      */
     public function testTypeColumn(): void
     {
@@ -48,8 +44,6 @@ final class CronExpressionTypeTest extends TestCase
 
     /**
      * @test
-     * @throws DbalException
-     * @throws ConversionException
      */
     public function convertToPhpNull(): void
     {
@@ -60,8 +54,6 @@ final class CronExpressionTypeTest extends TestCase
 
     /**
      * @test
-     * @throws DbalException
-     * @throws ConversionException
      */
     public function convertEmptyToPhpNull(): void
     {
@@ -72,8 +64,6 @@ final class CronExpressionTypeTest extends TestCase
 
     /**
      * @test
-     * @throws DbalException
-     * @throws ConversionException
      */
     public function convertToPhpReturnsCronExpression(): void
     {
@@ -84,8 +74,6 @@ final class CronExpressionTypeTest extends TestCase
 
     /**
      * @test
-     * @throws DbalException
-     * @throws ConversionException
      */
     public function convertFaultyTypeToPhpThrowsException(): void
     {
@@ -96,8 +84,6 @@ final class CronExpressionTypeTest extends TestCase
 
     /**
      * @test
-     * @throws DbalException
-     * @throws ConversionException
      */
     public function convertFaultyStringToPhpThrowsException(): void
     {
@@ -108,7 +94,6 @@ final class CronExpressionTypeTest extends TestCase
 
     /**
      * @test
-     * @throws DbalException
      */
     public function convertToDatabaseReturnsString(): void
     {
@@ -119,7 +104,6 @@ final class CronExpressionTypeTest extends TestCase
 
     /**
      * @test
-     * @throws DbalException
      */
     public function convertToDatabaseNull(): void
     {
@@ -127,9 +111,6 @@ final class CronExpressionTypeTest extends TestCase
         self::assertNull($val);
     }
 
-    /**
-     * @throws DbalException
-     */
     private function getType(): CronExpressionType
     {
         if (!Type::hasType('cron_expression')) {
