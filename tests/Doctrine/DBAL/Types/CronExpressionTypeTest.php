@@ -37,9 +37,9 @@ final class CronExpressionTypeTest extends TestCase
     {
         $length = 255;
         $sql = $this->getType()->getSQLDeclaration([
-            'length' => $length
+            'length' => $length,
         ], $this->getPlatform());
-        self::assertStringContainsString(strval($length), $sql);
+        self::assertStringContainsString((string) $length, $sql);
     }
 
     /**
@@ -128,16 +128,16 @@ final class CronExpressionTypeTest extends TestCase
         $mock = $this->createMock(AbstractPlatform::class);
         $mock->method('getVarcharTypeDeclarationSQL')
             ->withAnyParameters()
-            ->willReturnCallback(function (array $column)
-        {
-            /** @var int $length */
-            $length = $column['length'];
-            /** @var bool $fixed */
-            $fixed = $column['fixed'] ?? false;
+            ->willReturnCallback(function (array $column) {
+                /** @var int $length */
+                $length = $column['length'];
+                /** @var bool $fixed */
+                $fixed = $column['fixed'] ?? false;
 
-            return $fixed ? ($length > 0 ? 'CHAR(' . $length . ')' : 'CHAR(254)')
+                return $fixed ? ($length > 0 ? 'CHAR(' . $length . ')' : 'CHAR(254)')
                 : ($length > 0 ? 'VARCHAR(' . $length . ')' : 'VARCHAR(255)');
-        });
+            });
+
         return $mock;
     }
 }
