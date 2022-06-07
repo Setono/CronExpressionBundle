@@ -38,7 +38,8 @@ class CronExpressionValidator extends ConstraintValidator
         if (!DragonCronExpression::isValidExpression($value)) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ value }}', $this->formatValue($value))
-                ->addViolation();
+                ->addViolation()
+            ;
         }
     }
 }

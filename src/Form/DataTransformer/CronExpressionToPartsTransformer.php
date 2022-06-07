@@ -72,7 +72,8 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
                 ->setPart(CronExpression::HOUR, $this->convertCronParts($value['hours']))
                 ->setPart(CronExpression::DAY, $this->convertCronParts($value['days']))
                 ->setPart(CronExpression::MONTH, $this->convertCronParts($value['months']))
-                ->setPart(CronExpression::WEEKDAY, $this->convertCronParts($value['weekdays']));
+                ->setPart(CronExpression::WEEKDAY, $this->convertCronParts($value['weekdays']))
+            ;
 
             return $cronExpression;
         } catch (\InvalidArgumentException $e) {

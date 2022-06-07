@@ -24,5 +24,8 @@ final class SetonoCronExpressionExtensionTest extends AbstractExtensionTestCase
         $this->load();
 
         $this->assertContainerBuilderHasService('setono_cron_expression.form.type_guesser.cron_expression');
+        $doctrineConfig = $this->container->getExtensionConfig('doctrine');
+
+        self::assertEmpty($doctrineConfig);
     }
 }

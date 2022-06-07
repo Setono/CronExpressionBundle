@@ -12,7 +12,7 @@
     "require": {
         "php": ">=7.4",
         "brick/reflection": "^0.4",
-        "doctrine/dbal": "^3.3",
+        "doctrine/dbal": "^3.4",
         "doctrine/doctrine-bundle": "^1.9 || ^2.0",
         "dragonmantank/cron-expression": "^2.2 || ^3.0",
         "symfony/config": "^4.4 || ^5.4 || ^6.0",

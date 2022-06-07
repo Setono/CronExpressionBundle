@@ -25,7 +25,7 @@ final class SetonoCronExpressionExtension extends Extension implements PrependEx
         if (!$container->hasExtension('doctrine')) {
             @trigger_error(
                 'The doctrine extension was not loaded. Install using `composer req doctrine/doctrine-bundle`',
-                E_USER_WARNING
+                E_USER_WARNING,
             );
 
             return;
