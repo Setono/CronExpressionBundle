@@ -126,7 +126,7 @@ final class CronExpressionTypeTest extends TestCase
     private function getPlatform(): AbstractPlatform
     {
         $mock = $this->createMock(AbstractPlatform::class);
-        $mock->method('getVarcharTypeDeclarationSQL')
+        $mock->method('getStringTypeDeclarationSQL')
             ->withAnyParameters()
             ->willReturnCallback(function (array $column) {
                 /** @var int $length */
@@ -136,7 +136,8 @@ final class CronExpressionTypeTest extends TestCase
 
                 return $fixed ? ($length > 0 ? 'CHAR(' . $length . ')' : 'CHAR(254)')
                 : ($length > 0 ? 'VARCHAR(' . $length . ')' : 'VARCHAR(255)');
-            });
+            })
+        ;
 
         return $mock;
     }

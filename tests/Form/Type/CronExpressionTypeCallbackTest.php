@@ -31,7 +31,8 @@ class CronExpressionTypeCallbackTest extends TestCase
     {
         $mock = $this->createMock(ExecutionContextInterface::class);
         $mock->expects($counter)->method('addViolation')
-            ->with('{{value}} is not a valid cron part', ['value' => $value]);
+            ->with('{{value}} is not a valid cron part', ['value' => $value])
+        ;
 
         $type = new CronExpressionType();
         $type->validateCronField($value, $mock, CronExpression::MINUTE);
