@@ -4,18 +4,23 @@ declare(strict_types=1);
 
 namespace Setono\CronExpressionBundle\Form\TypeGuesser;
 
-use Brick\Reflection\ReflectionTools;
 use Cron\CronExpression;
-use ReflectionClass;
-use ReflectionException;
 use Setono\CronExpressionBundle\Form\Type\CronExpressionType;
 use Symfony\Component\Form\FormTypeGuesserInterface;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
 use Symfony\Component\Form\Guess\ValueGuess;
+use Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface;
+use Symfony\Component\PropertyInfo\Type;
 
 final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
 {
+    protected PropertyTypeExtractorInterface $extractor;
+
+    public function __construct(PropertyTypeExtractorInterface $extractor)
+    {
+        $this->extractor = $extractor;
+    }
     /**
      * @param string $class
      * @param string $property
@@ -26,20 +31,16 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
             return null;
         }
 
-        try {
-            $reflectionClass = new ReflectionClass($class);
-            $reflectionProperty = $reflectionClass->getProperty($property);
-        } catch (ReflectionException $e) {
+        $types = $this->extractor->getTypes($class, $property);
+        if (!$types) {
             return null;
         }
-
-        $reflectionTools = new ReflectionTools();
-        $propertyTypes = $reflectionTools->getPropertyTypes($reflectionProperty);
-
-        if (in_array(CronExpression::class, $propertyTypes, true)) {
-            return new TypeGuess(CronExpressionType::class, [], Guess::VERY_HIGH_CONFIDENCE);
+        foreach ($types as $type) {
+            if (Type::BUILTIN_TYPE_OBJECT === $type->getBuiltinType() &&
+                CronExpression::class === $type->getClassName()) {
+                return new TypeGuess(CronExpressionType::class, [], Guess::VERY_HIGH_CONFIDENCE);
+            }
         }
-
         return null;
     }
 
