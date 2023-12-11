@@ -19,7 +19,7 @@
         "symfony/form": "^4.4 || ^5.4 || ^6.0",
         "symfony/http-kernel": "^4.4 || ^5.4 || ^6.0",
         "symfony/options-resolver": "^4.4 || ^5.4 || ^6.0",
-        "symfony/property-info": "^4.4 || ^5.4 || ^6.0",
+        "symfony/property-info": "^4.4.49 || ^5.4 || ^6.0",
         "symfony/validator": "^4.4 || ^5.4 || ^6.0",
         "webmozart/assert": "^1.10"
     },
