@@ -14,6 +14,7 @@
         "doctrine/dbal": "^3.4",
         "doctrine/doctrine-bundle": "^1.9 || ^2.0",
         "dragonmantank/cron-expression": "^2.2 || ^3.0",
+        "phpdocumentor/reflection-docblock": "^5.3",
         "symfony/config": "^4.4 || ^5.4 || ^6.0",
         "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
         "symfony/form": "^4.4 || ^5.4 || ^6.0",
@@ -25,7 +26,6 @@
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^4.3",
-        "phpdocumentor/reflection-docblock": "*",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-phpunit": "^0.16.1",
         "roave/security-advisories": "dev-latest",
