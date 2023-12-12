@@ -15,6 +15,7 @@
         "doctrine/doctrine-bundle": "^1.9 || ^2.0",
         "dragonmantank/cron-expression": "^2.2 || ^3.0",
         "phpdocumentor/reflection-docblock": "^5.3",
+        "phpdocumentor/type-resolver": "^1.7",
         "symfony/config": "^4.4 || ^5.4 || ^6.0",
         "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
         "symfony/form": "^4.4 || ^5.4 || ^6.0",
