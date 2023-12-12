@@ -9,9 +9,6 @@ use Setono\CronExpressionBundle\Form\Type\CronExpressionType;
 use Setono\CronExpressionBundle\Form\TypeGuesser\CronExpressionTypeGuesser;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
-use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
-use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
-use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 
 final class CronExpressionTypeGuesserTest extends TestCase
 {
@@ -19,13 +16,7 @@ final class CronExpressionTypeGuesserTest extends TestCase
 
     public function setUp(): void
     {
-        $extractor = new PropertyInfoExtractor([], [
-            new PhpDocExtractor(),
-            new ReflectionExtractor(),
-        ]);
-
         $this->typeGuesser = new CronExpressionTypeGuesser();
-        $this->typeGuesser->setExtractor($extractor);
     }
 
     /**
