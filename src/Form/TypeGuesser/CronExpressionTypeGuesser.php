@@ -43,7 +43,7 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
             foreach ($types as $type) {
                 if (Type::BUILTIN_TYPE_OBJECT === $type->getBuiltinType() &&
                     CronExpression::class === $type->getClassName()) {
-                    return new TypeGuess(CronExpressionType::class, [], Guess::VERY_HIGH_CONFIDENCE);
+                    return $this->getGuess();
                 }
             }
         } else {
@@ -54,8 +54,10 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
                 if ($reflectionProperty->hasType()) {
                     $type = $reflectionProperty->getType();
 
-                    if ($type->getName() === CronExpression::class) {
-                        return new TypeGuess(CronExpressionType::class, [], Guess::VERY_HIGH_CONFIDENCE);
+                    if ($type instanceof \ReflectionNamedType) {
+                        if ($type->getName() === CronExpression::class) {
+                            return $this->getGuess();
+                        }
                     }
                 } else {
                     $docBlockFactory = DocBlockFactory::createInstance();
@@ -64,16 +66,16 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
                     $docBlock = $docBlockFactory->create($reflectionProperty,
                         $contextFactory->createFromReflector($reflectionProperty));
 
+                    /**
+                     * @var Var_ $tag
+                     */
                     foreach ($docBlock->getTagsByName('var') as $tag) {
-                        /**
-                         * @var $tag Var_
-                         */
                         $tagType = $tag->getType();
                         if ($tagType instanceof Object_) {
                             $fqsen = $tagType->getFqsen();
                             $fqsen = ltrim((string)$fqsen, '\\');
                             if (CronExpression::class === $fqsen) {
-                                return new TypeGuess(CronExpressionType::class, [], Guess::VERY_HIGH_CONFIDENCE);
+                                return $this->getGuess();
                             }
                         }
                     }
@@ -110,5 +112,18 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
     public function guessPattern($class, $property): ?ValueGuess
     {
         return null;
+    }
+
+    /**
+     * @param PropertyTypeExtractorInterface|null $extractor
+     */
+    public function setExtractor(?PropertyTypeExtractorInterface $extractor): void
+    {
+        $this->extractor = $extractor;
+    }
+
+    protected function getGuess(): TypeGuess
+    {
+        return new TypeGuess(CronExpressionType::class, [], Guess::VERY_HIGH_CONFIDENCE);
     }
 }

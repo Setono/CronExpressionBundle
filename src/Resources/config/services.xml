@@ -6,7 +6,9 @@
         <service id="setono_cron_expression.form.type_guesser.cron_expression"
                  class="Setono\CronExpressionBundle\Form\TypeGuesser\CronExpressionTypeGuesser">
             <tag name="form.type_guesser"/>
-            <argument type="service" id="property_info"/>
+            <call method="setExtractor">
+                <argument type="service" id="property_info"/>
+            </call>
         </service>
     </services>
 </container>
