@@ -24,7 +24,8 @@ final class CronExpressionTypeGuesserTest extends TestCase
             new ReflectionExtractor(),
         ]);
 
-        $this->typeGuesser = new CronExpressionTypeGuesser($extractor);
+        $this->typeGuesser = new CronExpressionTypeGuesser();
+        $this->typeGuesser->setExtractor($extractor);
     }
 
     /**
