@@ -46,6 +46,14 @@ final class CronExpressionTypeGuesserTest extends TestCase
     /**
      * @test
      */
+    public function it_returns_null_if_property_has_wrong_type(): void
+    {
+        $this->assertNull($this->typeGuesser->guessType(StubWithWrongType::class, 'property'));
+    }
+
+    /**
+     * @test
+     */
     public function it_guesses_type_when_type_is_a_fqcn(): void
     {
         $this->guess_type(StubFqcn::class);
