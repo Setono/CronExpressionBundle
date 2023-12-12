@@ -18,7 +18,7 @@ use Symfony\Component\PropertyInfo\Type;
 
 final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
 {
-    private ?PropertyTypeExtractorInterface $extractor;
+    private PropertyTypeExtractorInterface $extractor;
 
     public function __construct(?PropertyTypeExtractorInterface $extractor = null)
     {
