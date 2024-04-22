@@ -11,7 +11,6 @@
     ],
     "require": {
         "php": ">=7.4",
-        "brick/reflection": "^0.4",
         "doctrine/dbal": "^3.4",
         "doctrine/doctrine-bundle": "^1.9 || ^2.0",
         "dragonmantank/cron-expression": "^2.2 || ^3.0",
@@ -20,11 +19,13 @@
         "symfony/form": "^4.4 || ^5.4 || ^6.0",
         "symfony/http-kernel": "^4.4 || ^5.4 || ^6.0",
         "symfony/options-resolver": "^4.4 || ^5.4 || ^6.0",
+        "symfony/property-info": "^4.4.49 || ^5.4 || ^6.0",
         "symfony/validator": "^4.4 || ^5.4 || ^6.0",
         "webmozart/assert": "^1.10"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^4.3",
+        "phpdocumentor/reflection-docblock": "^5.3",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-phpunit": "^0.16.1",
         "roave/security-advisories": "dev-latest",
@@ -43,8 +44,8 @@
     },
     "config": {
         "allow-plugins": {
-            "ergebnis/composer-normalize": true,
-            "dealerdirect/phpcodesniffer-composer-installer": false
+            "dealerdirect/phpcodesniffer-composer-installer": false,
+            "ergebnis/composer-normalize": true
         },
         "sort-packages": true
     },
