@@ -15,4 +15,15 @@ use Symfony\Component\Validator\Constraint;
 class CronExpression extends Constraint
 {
     public string $message = '{{ value }} is not a valid cron expression.';
+
+    public function __construct(
+        string $message = null,
+        array $groups = null,
+        $payload = null,
+        array $options = []
+    ) {
+        parent::__construct($options, $groups, $payload);
+
+        $this->message = $message ?? $this->message;
+    }
 }
