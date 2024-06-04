@@ -32,9 +32,10 @@ final class CronExpressionType extends Type
         if (!is_string($value)) {
             if (class_exists(InvalidType::class)) {
                 throw InvalidType::new($value, CronExpression::class, ['string']);
-            } else {
+            } else if (method_exists(ConversionException::class, "conversionFailedInvalidType")) {
                 throw ConversionException::conversionFailedInvalidType($value, CronExpression::class, ['string']);
             }
+            return null;
         }
 
         if ('' === $value) {
@@ -46,9 +47,10 @@ final class CronExpressionType extends Type
         } catch (\Throwable $e) {
             if (class_exists(ValueNotConvertible::class)) {
                 throw ValueNotConvertible::new($value, CronExpression::class, null, $e);
-            } else {
+            } else if (method_exists(ConversionException::class, "conversionFailed")) {
                 throw ConversionException::conversionFailed($value, CronExpression::class, $e);
             }
+            return null;
         }
     }
 
