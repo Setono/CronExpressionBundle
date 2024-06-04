@@ -18,7 +18,7 @@ class CronExpression extends Constraint
 
     public function __construct(
         string $message = null,
-        array $groups = null,
+        ?array $groups = null,
         mixed $payload = null,
         array $options = []
     ) {
