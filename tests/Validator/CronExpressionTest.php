@@ -66,7 +66,7 @@ class CronExpressionTest extends ConstraintValidatorTestCase
      */
     public function testInvalidValues($value, string $valueAsString): void
     {
-        $constraint = new Constraint(message: 'myMessage');
+        $constraint = new Constraint('myMessage');
 
         $this->validator->validate($value, $constraint);
 
