@@ -7,6 +7,8 @@ namespace Setono\CronExpressionBundle\Tests\Doctrine\DBAL\Types;
 use Cron\CronExpression;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
+use Doctrine\DBAL\Types\Exception\InvalidType;
+use Doctrine\DBAL\Types\Exception\ValueNotConvertible;
 use Doctrine\DBAL\Types\Type;
 use PHPUnit\Framework\TestCase;
 use Setono\CronExpressionBundle\Doctrine\DBAL\Types\CronExpressionType;
@@ -78,6 +80,9 @@ final class CronExpressionTypeTest extends TestCase
     public function convertFaultyTypeToPhpThrowsException(): void
     {
         self::expectException(ConversionException::class);
+        if (class_exists(InvalidType::class)) {
+            self::expectException(InvalidType::class);
+        }
 
         $this->getType()->convertToPHPValue(new stdClass(), $this->getPlatform());
     }
@@ -88,6 +93,9 @@ final class CronExpressionTypeTest extends TestCase
     public function convertFaultyStringToPhpThrowsException(): void
     {
         self::expectException(ConversionException::class);
+        if (class_exists(ValueNotConvertible::class)) {
+            self::expectException(ValueNotConvertible::class);
+        }
 
         $this->getType()->convertToPHPValue('@never', $this->getPlatform());
     }
