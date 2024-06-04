@@ -16,6 +16,12 @@ class CronExpression extends Constraint
 {
     public string $message = '{{ value }} is not a valid cron expression.';
 
+    /**
+     * @param string|null $message
+     * @param string[]|null $groups
+     * @param mixed $payload
+     * @param array $options
+     */
     public function __construct(
         string $message = null,
         ?array $groups = null,
