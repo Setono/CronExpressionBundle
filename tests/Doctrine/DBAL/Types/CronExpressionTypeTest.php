@@ -80,7 +80,7 @@ final class CronExpressionTypeTest extends TestCase
     public function convertFaultyTypeToPhpThrowsException(): void
     {
         self::expectException(ConversionException::class);
-        if (class_exists(InvalidType::class)) {
+        if (class_exists(InvalidType::class) and is_a(InvalidType::class, \Throwable::class, true)) {
             self::expectException(InvalidType::class);
         }
 
@@ -93,7 +93,7 @@ final class CronExpressionTypeTest extends TestCase
     public function convertFaultyStringToPhpThrowsException(): void
     {
         self::expectException(ConversionException::class);
-        if (class_exists(ValueNotConvertible::class)) {
+        if (class_exists(ValueNotConvertible::class) and is_a(ValueNotConvertible::class, \Throwable::class, true)) {
             self::expectException(ValueNotConvertible::class);
         }
 
