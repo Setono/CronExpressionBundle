@@ -80,7 +80,10 @@ final class CronExpressionTypeTest extends TestCase
     public function convertFaultyTypeToPhpThrowsException(): void
     {
         self::expectException(ConversionException::class);
-        if (class_exists(InvalidType::class) and is_a(InvalidType::class, \Throwable::class, true)) {
+        if (class_exists(InvalidType::class)) {
+            /**
+             * @psalm-suppress InvalidArgument
+             */
             self::expectException(InvalidType::class);
         }
 
@@ -93,7 +96,10 @@ final class CronExpressionTypeTest extends TestCase
     public function convertFaultyStringToPhpThrowsException(): void
     {
         self::expectException(ConversionException::class);
-        if (class_exists(ValueNotConvertible::class) and is_a(ValueNotConvertible::class, \Throwable::class, true)) {
+        if (class_exists(ValueNotConvertible::class)) {
+            /**
+             * @psalm-suppress InvalidArgument
+             */
             self::expectException(ValueNotConvertible::class);
         }
 
