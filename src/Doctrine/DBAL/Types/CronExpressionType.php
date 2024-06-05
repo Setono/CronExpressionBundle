@@ -7,6 +7,8 @@ namespace Setono\CronExpressionBundle\Doctrine\DBAL\Types;
 use Cron\CronExpression;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
+use Doctrine\DBAL\Types\Exception\InvalidType;
+use Doctrine\DBAL\Types\Exception\ValueNotConvertible;
 use Doctrine\DBAL\Types\Type;
 
 final class CronExpressionType extends Type
@@ -28,7 +30,14 @@ final class CronExpressionType extends Type
         }
 
         if (!is_string($value)) {
-            throw ConversionException::conversionFailedInvalidType($value, CronExpression::class, ['string']);
+            if (class_exists(InvalidType::class)) {
+                throw InvalidType::new($value, CronExpression::class, ['string']);
+            } else {
+                /**
+                 * @psalm-suppress UndefinedMethod
+                 */
+                throw ConversionException::conversionFailedInvalidType($value, CronExpression::class, ['string']);
+            }
         }
 
         if ('' === $value) {
@@ -38,7 +47,14 @@ final class CronExpressionType extends Type
         try {
             return CronExpression::factory($value);
         } catch (\Throwable $e) {
-            throw ConversionException::conversionFailed($value, CronExpression::class, $e);
+            if (class_exists(ValueNotConvertible::class)) {
+                throw ValueNotConvertible::new($value, CronExpression::class, null, $e);
+            } else {
+                /**
+                 * @psalm-suppress UndefinedMethod
+                 */
+                throw ConversionException::conversionFailed($value, CronExpression::class, $e);
+            }
         }
     }
 

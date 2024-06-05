@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": ">=7.4",
-        "doctrine/dbal": "^3.4",
+        "doctrine/dbal": "^3.4 || ^4.0",
         "doctrine/doctrine-bundle": "^1.9 || ^2.0",
         "dragonmantank/cron-expression": "^2.2 || ^3.0",
         "symfony/config": "^5.4 || ^6.0",
