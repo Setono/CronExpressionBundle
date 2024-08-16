@@ -39,6 +39,10 @@ final class CronExpressionToStringTransformer implements DataTransformerInterfac
             throw new TransformationFailedException('Expected an instance of string');
         }
 
-        return CronExpression::factory($value);
+        try {
+            return CronExpression::factory($value);
+        } catch (\InvalidArgumentException $ex) {
+            throw new TransformationFailedException('Invalid CronExpression', $ex->getCode(), $ex);
+        }
     }
 }
