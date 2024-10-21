@@ -24,7 +24,7 @@ class CronExpression extends Constraint
         string $message = null,
         ?array $groups = null,
         mixed $payload = null,
-        array $options = [],
+        array $options = []
     ) {
         parent::__construct($options, $groups, $payload);
 
