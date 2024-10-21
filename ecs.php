@@ -7,7 +7,7 @@ use Symplify\EasyCodingStandard\ValueObject\Option;
 
 return static function (ECSConfig $config): void {
     $config->import('vendor/sylius-labs/coding-standard/ecs.php');
-    $config->parameters()->set(Option::PATHS, [
+    $config->paths([
         'src', 'tests'
     ]);
 };
