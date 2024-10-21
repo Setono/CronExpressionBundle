@@ -33,6 +33,7 @@ final class CronExpressionType extends Type
             if (class_exists(InvalidType::class)) {
                 throw InvalidType::new($value, CronExpression::class, ['string']);
             }
+
             /**
              * @psalm-suppress UndefinedMethod
              */
@@ -49,6 +50,7 @@ final class CronExpressionType extends Type
             if (class_exists(ValueNotConvertible::class)) {
                 throw ValueNotConvertible::new($value, CronExpression::class, null, $e);
             }
+
             /**
              * @psalm-suppress UndefinedMethod
              */
