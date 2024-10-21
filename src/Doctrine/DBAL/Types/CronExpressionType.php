@@ -32,12 +32,11 @@ final class CronExpressionType extends Type
         if (!is_string($value)) {
             if (class_exists(InvalidType::class)) {
                 throw InvalidType::new($value, CronExpression::class, ['string']);
-            } else {
-                /**
-                 * @psalm-suppress UndefinedMethod
-                 */
-                throw ConversionException::conversionFailedInvalidType($value, CronExpression::class, ['string']);
             }
+            /**
+             * @psalm-suppress UndefinedMethod
+             */
+            throw ConversionException::conversionFailedInvalidType($value, CronExpression::class, ['string']);
         }
 
         if ('' === $value) {
@@ -49,12 +48,11 @@ final class CronExpressionType extends Type
         } catch (\Throwable $e) {
             if (class_exists(ValueNotConvertible::class)) {
                 throw ValueNotConvertible::new($value, CronExpression::class, null, $e);
-            } else {
-                /**
-                 * @psalm-suppress UndefinedMethod
-                 */
-                throw ConversionException::conversionFailed($value, CronExpression::class, $e);
             }
+            /**
+             * @psalm-suppress UndefinedMethod
+             */
+            throw ConversionException::conversionFailed($value, CronExpression::class, $e);
         }
     }
 
