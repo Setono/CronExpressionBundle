@@ -10,7 +10,7 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 use Webmozart\Assert\Assert;
 
 /**
- * @template-implements DataTransformerInterface<CronExpression, array<string, array<string>>
+ * @template-implements DataTransformerInterface<CronExpression, array<string, array<string>>>
  */
 final class CronExpressionToPartsTransformer implements DataTransformerInterface
 {
@@ -97,6 +97,9 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
         return implode(',', $cronArray);
     }
 
+    /**
+     * @return array<string>
+     */
     private function convertCronString(string $cronString): array
     {
         if ('*' === $cronString) {
