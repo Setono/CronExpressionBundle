@@ -36,7 +36,7 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
         }
 
         $types = $this->extractor->getTypes($class, $property);
-        if (is_null($types)) {
+        if (null === $types) {
             return null;
         }
         foreach ($types as $type) {
