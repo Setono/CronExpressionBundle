@@ -10,6 +10,11 @@ use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Constraints\CallbackValidator;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
+/**
+ * @template-extends ConstraintValidatorTestCase<CallbackValidator>
+ *
+ * @psalm-suppress TooManyTemplateParams
+ */
 class FormCallbackTest extends ConstraintValidatorTestCase
 {
     protected function createValidator(): CallbackValidator

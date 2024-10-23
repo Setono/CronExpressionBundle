@@ -8,6 +8,11 @@ use Cron\CronExpression;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
+/**
+ * @template-implements DataTransformerInterface<CronExpression, string>
+ *
+ * @psalm-suppress TooManyTemplateParams
+ */
 final class CronExpressionToStringTransformer implements DataTransformerInterface
 {
     /**

@@ -13,6 +13,11 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
+/**
+ * @template-extends ConstraintValidatorTestCase<CronExpressionValidator>
+ *
+ * @psalm-suppress TooManyTemplateParams
+ */
 class CronExpressionTest extends ConstraintValidatorTestCase
 {
     protected function createValidator(): CronExpressionValidator
