@@ -13,8 +13,21 @@ class ToStringTest extends TestCase
 {
     public function testInvalidReverseTransform(): void
     {
+        $this->invalidReverseTransform(new stdClass());
+    }
+
+    public function testInvalidCronReverseTransform(): void
+    {
+        $this->invalidReverseTransform('* * * * * *');
+    }
+
+    /**
+     * @param mixed $value
+     */
+    protected function invalidReverseTransform($value): void
+    {
         $transformer = new CronExpressionToStringTransformer();
         $this->expectException(TransformationFailedException::class);
-        $transformer->reverseTransform(new stdClass());
+        $transformer->reverseTransform($value);
     }
 }
