@@ -9,6 +9,9 @@ use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Webmozart\Assert\Assert;
 
+/**
+ * @template-implements DataTransformerInterface<CronExpression, array<string>>
+ */
 final class CronExpressionToStringPartsTransformer implements DataTransformerInterface
 {
     /**
