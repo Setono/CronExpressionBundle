@@ -18,7 +18,7 @@ class ToStringTest extends TestCase
 
     public function testInvalidCronReverseTransform(): void
     {
-        $this->invalidReverseTransform("* * * * * *");
+        $this->invalidReverseTransform('* * * * * *');
     }
 
     /**
