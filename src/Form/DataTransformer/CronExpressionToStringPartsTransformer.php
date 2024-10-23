@@ -16,6 +16,7 @@ final class CronExpressionToStringPartsTransformer implements DataTransformerInt
 {
     /**
      * @param mixed $value
+     *
      * @return array<string,string>
      */
     public function transform($value): array
