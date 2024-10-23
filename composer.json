@@ -24,15 +24,15 @@
         "webmozart/assert": "^1.10"
     },
     "require-dev": {
+        "ergebnis/composer-normalize": "^2.42",
         "matthiasnoback/symfony-dependency-injection-test": "^4.3",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-phpunit": "^0.19",
         "roave/security-advisories": "dev-latest",
-        "vimeo/psalm": "^5.24",
-        "symplify/easy-coding-standard": "^12.3.6",
         "sylius-labs/coding-standard": "^4.1.1",
-        "ergebnis/composer-normalize": "^2.42"
+        "symplify/easy-coding-standard": "^12.3.6",
+        "vimeo/psalm": "^5.24"
     },
     "prefer-stable": true,
     "autoload": {
