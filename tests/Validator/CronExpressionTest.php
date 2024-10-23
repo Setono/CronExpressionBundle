@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 /**
  * @template-extends ConstraintValidatorTestCase<CronExpressionValidator>
+ * @psalm-suppress TooManyTemplateParams
  */
 class CronExpressionTest extends ConstraintValidatorTestCase
 {
