@@ -10,13 +10,14 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 use Webmozart\Assert\Assert;
 
 /**
- * @template-implements DataTransformerInterface<CronExpression, array<string, int>>
+ * @template-implements DataTransformerInterface<CronExpression, array<string, array<string>>
  */
 final class CronExpressionToPartsTransformer implements DataTransformerInterface
 {
     /**
      * @param mixed $value
-     * @return array<string, int>
+     *
+     * @return array<string, array<string>>
      */
     public function transform($value): array
     {
