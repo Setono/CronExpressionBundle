@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 /**
  * @template-extends ConstraintValidatorTestCase<CallbackValidator>
+ *
  * @psalm-suppress TooManyTemplateParams
  */
 class FormCallbackTest extends ConstraintValidatorTestCase
