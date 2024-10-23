@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints\CallbackValidator;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 /**
- * @template-implements ConstraintValidatorTestCase<CallbackValidator>
+ * @template-extends ConstraintValidatorTestCase<CallbackValidator>
  */
 class FormCallbackTest extends ConstraintValidatorTestCase
 {

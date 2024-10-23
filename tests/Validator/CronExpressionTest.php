@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 /**
- * @template-implements ConstraintValidatorTestCase<CronExpressionValidator>
+ * @template-extends ConstraintValidatorTestCase<CronExpressionValidator>
  */
 class CronExpressionTest extends ConstraintValidatorTestCase
 {
