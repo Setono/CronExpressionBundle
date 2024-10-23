@@ -24,6 +24,7 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
     {
         $this->extractor = $extractor ?? $this->createExtractor();
     }
+
     /**
      * @param string $class
      * @param string $property
@@ -33,7 +34,6 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
         if (!class_exists($class)) {
             return null;
         }
-
 
         $types = $this->extractor->getTypes($class, $property);
         if (!$types) {
@@ -45,6 +45,7 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
                 return new TypeGuess(CronExpressionType::class, [], Guess::VERY_HIGH_CONFIDENCE);
             }
         }
+
         return null;
     }
 

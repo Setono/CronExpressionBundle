@@ -38,6 +38,9 @@ jobs:
 
             -   name: "Validate composer"
                 run: "composer validate --strict"
+                
+            -   name: "Check composer normalized"
+                run: "composer normalize --dry-run"
 
             -   name: "Check style"
                 run: "composer check-style"

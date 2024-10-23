@@ -30,7 +30,9 @@
         "psalm/plugin-phpunit": "^0.19",
         "roave/security-advisories": "dev-latest",
         "vimeo/psalm": "^5.24",
-        "symplify/easy-coding-standard": "^12.3.6"
+        "symplify/easy-coding-standard": "^12.3.6",
+        "sylius-labs/coding-standard": "^4.1.1",
+        "ergebnis/composer-normalize": "^2.42"
     },
     "prefer-stable": true,
     "autoload": {
