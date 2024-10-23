@@ -11,7 +11,7 @@ use Webmozart\Assert\Assert;
 
 /**
  * @template-implements DataTransformerInterface<CronExpression, array<string, array<string>>>
- * @psalm-suppress MissingTemplateParam
+ * @psalm-suppress TooManyTemplateParams
  */
 final class CronExpressionToPartsTransformer implements DataTransformerInterface
 {
