@@ -151,6 +151,7 @@ jobs:
                 symfony:
                     - "^5.4"
                     - "^6.0"
+                    - "^7.0"
 
                 exclude:
                     -   php-version: "7.4"
