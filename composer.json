@@ -25,7 +25,7 @@
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.42",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.3",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.3 || ^5.0 || ^6.0",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-phpunit": "^0.19",
