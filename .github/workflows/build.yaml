@@ -63,7 +63,11 @@ jobs:
                 symfony:
                     - "^5.4"
                     - "^6.0"
+                    - "^7.0"
 
+                exclude:
+                    -   php-version: "8.1"
+                        symfony: "^7.0"
         steps:
             -   name: "Checkout"
                 uses: "actions/checkout@v4"
@@ -107,7 +111,11 @@ jobs:
                 symfony:
                     - "^5.4"
                     - "^6.0"
+                    - "^7.0"
 
+                exclude:
+                    -   php-version: "8.1"
+                        symfony: "^7.0"
         steps:
             -   name: "Checkout"
                 uses: "actions/checkout@v4"
@@ -149,10 +157,11 @@ jobs:
                 symfony:
                     - "^5.4"
                     - "^6.0"
+                    - "^7.0"
 
                 exclude:
-                    -   php-version: "7.4"
-                        symfony: "^6.0"
+                    -   php-version: "8.1"
+                        symfony: "^7.0"
 
         steps:
             -   name: "Checkout"
