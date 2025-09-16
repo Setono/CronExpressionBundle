@@ -38,11 +38,7 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
         }
 
         if (method_exists($this->extractor, 'getType') && class_exists(Type::class)) {
-            $type = $this->extractor->getType($class, $property);
-            if (null === $type) {
-                return null;
-            }
-            if ($type->isIdentifiedBy(CronExpression::class)) {
+            if ($this->extractor->getType($class, $property)?->isIdentifiedBy(CronExpression::class)) {
                 return new TypeGuess(CronExpressionType::class, [], Guess::VERY_HIGH_CONFIDENCE);
             }
         } else {
