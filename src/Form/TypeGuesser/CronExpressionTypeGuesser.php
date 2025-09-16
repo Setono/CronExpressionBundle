@@ -14,7 +14,7 @@ use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 use Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface;
-use Symfony\Component\PropertyInfo\Type;
+use Symfony\Component\PropertyInfo\Type as LegacyType;
 
 final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
 {
@@ -35,14 +35,24 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
             return null;
         }
 
-        $types = $this->extractor->getTypes($class, $property);
-        if (null === $types) {
-            return null;
-        }
-        foreach ($types as $type) {
-            if (Type::BUILTIN_TYPE_OBJECT === $type->getBuiltinType() &&
-                CronExpression::class === $type->getClassName()) {
+        if (method_exists($this->extractor, 'getType')) {
+            $type = $this->extractor->getType($class, $property);
+            if (null === $type) {
+                return null;
+            }
+            if ($type->isIdentifiedBy(CronExpression::class)) {
                 return new TypeGuess(CronExpressionType::class, [], Guess::VERY_HIGH_CONFIDENCE);
+            }
+        } else {
+            $types = $this->extractor->getTypes($class, $property);
+            if (null === $types) {
+                return null;
+            }
+            foreach ($types as $type) {
+                if (LegacyType::BUILTIN_TYPE_OBJECT === $type->getBuiltinType() &&
+                    CronExpression::class === $type->getClassName()) {
+                    return new TypeGuess(CronExpressionType::class, [], Guess::VERY_HIGH_CONFIDENCE);
+                }
             }
         }
 
