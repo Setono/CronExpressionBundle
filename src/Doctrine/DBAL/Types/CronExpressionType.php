@@ -15,6 +15,7 @@ final class CronExpressionType extends Type
 {
     public const CRON_EXPRESSION_TYPE = 'cron_expression';
 
+    #[\Override]
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         return $platform->getStringTypeDeclarationSQL($column);
@@ -25,6 +26,7 @@ final class CronExpressionType extends Type
      *
      * @throws InvalidType|ValueNotConvertible
      */
+    #[\Override]
     public function convertToPHPValue($value, AbstractPlatform $platform): ?CronExpression
     {
         if (null === $value) {
@@ -55,6 +57,7 @@ final class CronExpressionType extends Type
     /**
      * @param mixed $value
      */
+    #[\Override]
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
         if (null === $value) {

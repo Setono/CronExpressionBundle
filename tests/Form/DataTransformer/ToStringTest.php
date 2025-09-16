@@ -9,7 +9,7 @@ use Setono\CronExpressionBundle\Form\DataTransformer\CronExpressionToStringTrans
 use stdClass;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-class ToStringTest extends TestCase
+final class ToStringTest extends TestCase
 {
     public function testInvalidReverseTransform(): void
     {

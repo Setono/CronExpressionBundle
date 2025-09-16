@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Setono\CronExpressionBundle\Form\Type\CronExpressionType;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-class CronExpressionTypeCallbackTest extends TestCase
+final class CronExpressionTypeCallbackTest extends TestCase
 {
     public function testNullNoViolation(): void
     {

@@ -15,6 +15,7 @@ use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 use Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface;
 use Symfony\Component\PropertyInfo\Type as LegacyType;
+use Symfony\Component\TypeInfo\Type;
 
 final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
 {
@@ -29,6 +30,7 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
      * @param string $class
      * @param string $property
      */
+    #[\Override]
     public function guessType($class, $property): ?TypeGuess
     {
         if (!class_exists($class)) {
@@ -36,6 +38,9 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
         }
 
         if (method_exists($this->extractor, 'getType')) {
+            /**
+             * @var Type|null $type
+             */
             $type = $this->extractor->getType($class, $property);
             if (null === $type) {
                 return null;
@@ -63,6 +68,7 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
      * @param string $class
      * @param string $property
      */
+    #[\Override]
     public function guessRequired($class, $property): ?ValueGuess
     {
         return null;
@@ -72,6 +78,7 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
      * @param string $class
      * @param string $property
      */
+    #[\Override]
     public function guessMaxLength($class, $property): ?ValueGuess
     {
         return null;
@@ -81,6 +88,7 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
      * @param string $class
      * @param string $property
      */
+    #[\Override]
     public function guessPattern($class, $property): ?ValueGuess
     {
         return null;

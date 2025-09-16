@@ -10,7 +10,7 @@ use Setono\CronExpressionBundle\Form\DataTransformer\CronExpressionToPartsTransf
 use stdClass;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
-class ToPartsTest extends TestCase
+final class ToPartsTest extends TestCase
 {
     public function testNullReverseTransform(): void
     {

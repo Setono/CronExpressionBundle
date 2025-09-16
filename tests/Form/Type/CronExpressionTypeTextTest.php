@@ -11,7 +11,7 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Test\Traits\ValidatorExtensionTrait;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-class CronExpressionTypeTextTest extends TypeTestCase
+final class CronExpressionTypeTextTest extends TypeTestCase
 {
     use ValidatorExtensionTrait;
 

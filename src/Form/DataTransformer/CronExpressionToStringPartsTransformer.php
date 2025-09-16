@@ -21,6 +21,7 @@ final class CronExpressionToStringPartsTransformer implements DataTransformerInt
      *
      * @return array<string,string>
      */
+    #[\Override]
     public function transform($value): array
     {
         if (null === $value) {
@@ -49,6 +50,7 @@ final class CronExpressionToStringPartsTransformer implements DataTransformerInt
     /**
      * @param mixed $value
      */
+    #[\Override]
     public function reverseTransform($value): CronExpression
     {
         $exception = new TransformationFailedException('Expected an instance of array{minutes: string, hours: string, days: string, months: string, weekdays: string}');

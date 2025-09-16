@@ -21,6 +21,7 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
      *
      * @return array<string, array<string>>
      */
+    #[\Override]
     public function transform($value): array
     {
         if (null === $value) {
@@ -49,6 +50,7 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
     /**
      * @param mixed $value
      */
+    #[\Override]
     public function reverseTransform($value): CronExpression
     {
         $cronExpression = CronExpression::factory('* * * * *');

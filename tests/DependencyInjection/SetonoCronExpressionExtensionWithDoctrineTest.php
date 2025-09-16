@@ -11,6 +11,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 
 final class SetonoCronExpressionExtensionWithDoctrineTest extends AbstractExtensionTestCase
 {
+    #[\Override]
     protected function getContainerExtensions(): array
     {
         return [

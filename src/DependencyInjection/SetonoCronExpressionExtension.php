@@ -14,12 +14,14 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class SetonoCronExpressionExtension extends Extension implements PrependExtensionInterface
 {
+    #[\Override]
     public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
     }
 
+    #[\Override]
     public function prepend(ContainerBuilder $container): void
     {
         if (!$container->hasExtension('doctrine')) {

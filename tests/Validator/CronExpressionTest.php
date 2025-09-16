@@ -18,8 +18,9 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
  *
  * @psalm-suppress TooManyTemplateParams
  */
-class CronExpressionTest extends ConstraintValidatorTestCase
+final class CronExpressionTest extends ConstraintValidatorTestCase
 {
+    #[\Override]
     protected function createValidator(): CronExpressionValidator
     {
         return new CronExpressionValidator();

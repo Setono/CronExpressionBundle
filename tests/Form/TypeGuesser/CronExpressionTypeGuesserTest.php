@@ -14,6 +14,7 @@ final class CronExpressionTypeGuesserTest extends TestCase
 {
     private CronExpressionTypeGuesser $typeGuesser;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->typeGuesser = new CronExpressionTypeGuesser();

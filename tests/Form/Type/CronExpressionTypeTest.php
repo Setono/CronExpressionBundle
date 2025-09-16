@@ -10,7 +10,7 @@ use stdClass;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-class CronExpressionTypeTest extends TypeTestCase
+final class CronExpressionTypeTest extends TypeTestCase
 {
     /**
      * @test
