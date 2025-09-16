@@ -44,7 +44,7 @@
         </UnusedProperty>
         <UnusedParam>
             <errorLevel type="suppress">
-                <file name="" />
+                <directory name="src/Doctrine/DBAL/Types" />
             </errorLevel>
         </UnusedParam>
     </issueHandlers>
