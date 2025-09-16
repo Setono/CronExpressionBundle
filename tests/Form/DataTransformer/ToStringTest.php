@@ -15,6 +15,7 @@ final class ToStringTest extends TestCase
     {
         $this->expectedReverseTransform(null, '* * * * *');
     }
+
     public function testInvalidReverseTransform(): void
     {
         $this->invalidReverseTransform(new stdClass());

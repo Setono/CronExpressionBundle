@@ -72,6 +72,7 @@ final class CronExpressionType extends Type
         return self::CRON_EXPRESSION_TYPE;
     }
 
+    /** @noinspection PhpUnusedParameterInspection */
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;

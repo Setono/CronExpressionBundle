@@ -42,5 +42,10 @@
                 <directory name="tests/Form/TypeGuesser"/>
             </errorLevel>
         </UnusedProperty>
+        <UnusedParam>
+            <errorLevel type="suppress">
+                <file name="" />
+            </errorLevel>
+        </UnusedParam>
     </issueHandlers>
 </psalm>

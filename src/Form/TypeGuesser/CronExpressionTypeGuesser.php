@@ -37,7 +37,7 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
             return null;
         }
 
-        if (method_exists($this->extractor, 'getType')) {
+        if (method_exists($this->extractor, 'getType') && class_exists(Type::class)) {
             /**
              * @var Type|null $type
              */
