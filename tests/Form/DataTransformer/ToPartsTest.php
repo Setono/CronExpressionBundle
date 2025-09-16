@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\CronExpressionBundle\Tests\Form\DataTransformer;
 
-use Cron\CronExpression;
 use PHPUnit\Framework\TestCase;
 use Setono\CronExpressionBundle\Form\DataTransformer\CronExpressionToPartsTransformer;
 use stdClass;
@@ -62,25 +61,16 @@ final class ToPartsTest extends TestCase
         ]);
     }
 
-    /**
-     * @param mixed $value
-     */
-    protected function invalidReverseTransform($value): void
+    protected function invalidReverseTransform(mixed $value): void
     {
         $transformer = new CronExpressionToPartsTransformer();
         $this->expectException(TransformationFailedException::class);
         $transformer->reverseTransform($value);
     }
 
-    /**
-     * @param mixed $input
-     */
-    protected function expectedReverseTransform($input, string $expected): void
+    protected function expectedReverseTransform(mixed $input, string $expected): void
     {
         $transformer = new CronExpressionToPartsTransformer();
-        $value = $transformer->reverseTransform($input);
-
-        $this->assertInstanceOf(CronExpression::class, $value);
-        $this->assertSame($expected, $value->getExpression());
+        $this->assertSame($expected, $transformer->reverseTransform($input)->getExpression());
     }
 }

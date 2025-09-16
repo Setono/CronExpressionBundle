@@ -11,6 +11,10 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 final class ToStringTest extends TestCase
 {
+    public function testNullReverseTransform(): void
+    {
+        $this->expectedReverseTransform(null, '* * * * *');
+    }
     public function testInvalidReverseTransform(): void
     {
         $this->invalidReverseTransform(new stdClass());
@@ -21,13 +25,16 @@ final class ToStringTest extends TestCase
         $this->invalidReverseTransform('* * * * * *');
     }
 
-    /**
-     * @param mixed $value
-     */
-    protected function invalidReverseTransform($value): void
+    protected function invalidReverseTransform(mixed $value): void
     {
         $transformer = new CronExpressionToStringTransformer();
         $this->expectException(TransformationFailedException::class);
         $transformer->reverseTransform($value);
+    }
+
+    protected function expectedReverseTransform(mixed $input, string $expected): void
+    {
+        $transformer = new CronExpressionToStringTransformer();
+        $this->assertSame($expected, $transformer->reverseTransform($input)->getExpression());
     }
 }
