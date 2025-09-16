@@ -17,6 +17,11 @@
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
     </plugins>
     <issueHandlers>
+        <UnusedClass>
+            <errorLevel type="suppress">
+                <referencedClass name="Setono\CronExpressionBundle\SetonoCronExpressionBundle" />
+            </errorLevel>
+        </UnusedClass>
         <DeprecatedMethod>
             <errorLevel type="suppress">
                 <referencedMethod name="Cron\CronExpression::factory"/>
@@ -32,5 +37,10 @@
                 <directory name="src/Validator"/>
             </errorLevel>
         </PropertyNotSetInConstructor>
+        <UnusedProperty>
+            <errorLevel type="suppress">
+                <directory name="tests/Form/TypeGuesser"/>
+            </errorLevel>
+        </UnusedProperty>
     </issueHandlers>
 </psalm>
