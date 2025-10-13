@@ -86,7 +86,7 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
             new ConstructorExtractor([
                 $docExtractor,
                 $reflectionExtractor,
-            ])
+            ]),
         ], [], [], [$reflectionExtractor]);
     }
 
