@@ -17,10 +17,7 @@ final class SetonoCronExpressionExtensionTest extends AbstractExtensionTestCase
         ];
     }
 
-    /**
-     * @test
-     */
-    public function loadServices(): void
+    public function testLoadServices(): void
     {
         $this->load();
 

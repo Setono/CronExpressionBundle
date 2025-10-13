@@ -20,10 +20,7 @@ final class SetonoCronExpressionExtensionWithDoctrineTest extends AbstractExtens
         ];
     }
 
-    /**
-     * @test
-     */
-    public function loadServices(): void
+    public function testLoadServices(): void
     {
         $this->setParameter('kernel.debug', true);
         $this->load();

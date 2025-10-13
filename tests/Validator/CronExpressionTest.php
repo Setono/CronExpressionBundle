@@ -83,7 +83,7 @@ final class CronExpressionTest extends ConstraintValidatorTestCase
     /**
      * @psalm-return list<array{0: int|string, 1: string}>
      */
-    public function getInvalidValues(): array
+    public static function getInvalidValues(): array
     {
         return [
             [123456, '"123456"'],
