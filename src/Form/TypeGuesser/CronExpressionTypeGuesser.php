@@ -38,25 +38,8 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
             return null;
         }
 
-        if (class_exists(Type::class) && method_exists($this->extractor, 'getType')) {
-            $type = $this->extractor->getType($class, $property);
-            if (null === $type) {
-                return null;
-            }
-            if ($type->isIdentifiedBy(CronExpression::class)) {
-                return new TypeGuess(CronExpressionType::class, [], Guess::VERY_HIGH_CONFIDENCE);
-            }
-        } else {
-            $types = $this->extractor->getTypes($class, $property);
-            if (null === $types) {
-                return null;
-            }
-            foreach ($types as $lType) {
-                if (LegacyType::BUILTIN_TYPE_OBJECT === $lType->getBuiltinType() &&
-                    CronExpression::class === $lType->getClassName()) {
-                    return new TypeGuess(CronExpressionType::class, [], Guess::VERY_HIGH_CONFIDENCE);
-                }
-            }
+        if ($this->isCronExpression($class, $property)) {
+            return new TypeGuess(CronExpressionType::class, [], Guess::VERY_HIGH_CONFIDENCE);
         }
 
         return null;
@@ -105,5 +88,33 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
                 $reflectionExtractor
             ])
         ], [], [], [$reflectionExtractor]);
+    }
+
+    /**
+     * @psalm-suppress all
+     */
+    private function isCronExpression(string $class, string $property): bool
+    {
+        if (class_exists(Type::class) && method_exists($this->extractor, 'getType')) {
+            $type = $this->extractor->getType($class, $property);
+            if (null === $type) {
+                return false;
+            }
+            if ($type->isIdentifiedBy(CronExpression::class)) {
+                return true;
+            }
+        } else {
+            $types = $this->extractor->getTypes($class, $property);
+            if (null === $types) {
+                return false;
+            }
+            foreach ($types as $lType) {
+                if (LegacyType::BUILTIN_TYPE_OBJECT === $lType->getBuiltinType() &&
+                    CronExpression::class === $lType->getClassName()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
