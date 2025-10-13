@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormTypeGuesserInterface;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
 use Symfony\Component\Form\Guess\ValueGuess;
+use Symfony\Component\PropertyInfo\Extractor\ConstructorExtractor;
 use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
@@ -93,9 +94,16 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
 
     private function createExtractor(): PropertyTypeExtractorInterface
     {
+        $docExtractor = new PhpDocExtractor();
+        $reflectionExtractor = new ReflectionExtractor();
+
         return new PropertyInfoExtractor([], [
-            new PhpDocExtractor(),
-            new ReflectionExtractor(),
-        ]);
+            $docExtractor,
+            $reflectionExtractor,
+            new ConstructorExtractor([
+                $docExtractor,
+                $reflectionExtractor
+            ])
+        ], [], [], [$reflectionExtractor]);
     }
 }
