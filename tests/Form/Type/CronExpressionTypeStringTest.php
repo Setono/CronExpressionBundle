@@ -12,7 +12,6 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 final class CronExpressionTypeStringTest extends TypeTestCase
 {
-
     public function testSubmitWithAllSet(): void
     {
         $this->_submit('0 12 1 6 3', '0 12 1 6 3');
