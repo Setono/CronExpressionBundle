@@ -1,5 +1,6 @@
 <?php
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use ShipMonk\ComposerDependencyAnalyser\Config\Configuration;
 use ShipMonk\ComposerDependencyAnalyser\Config\ErrorType;
 use Symfony\Component\TypeInfo\Type;
@@ -19,6 +20,10 @@ if (class_exists(Type::class)) {
 // ignore polyfill
 if (version_compare(PHP_VERSION, '8.3.0', '>=')) {
     $config->ignoreErrorsOnPackage('symfony/polyfill-php83', [ErrorType::UNUSED_DEPENDENCY]);
+}
+
+if (!class_exists(DataProvider::class)) {
+    $config->ignoreUnknownClasses([DataProvider::class]);
 }
 
 return $config;
