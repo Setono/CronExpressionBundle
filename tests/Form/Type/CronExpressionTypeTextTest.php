@@ -11,14 +11,11 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Test\Traits\ValidatorExtensionTrait;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-class CronExpressionTypeTextTest extends TypeTestCase
+final class CronExpressionTypeTextTest extends TypeTestCase
 {
     use ValidatorExtensionTrait;
 
-    /**
-     * @test
-     */
-    public function submitWithAllSet(): void
+    public function testSubmitWithAllSet(): void
     {
         $this->_submit([
             'minutes' => '0',
@@ -29,10 +26,7 @@ class CronExpressionTypeTextTest extends TypeTestCase
         ], '0 12 1 6 3');
     }
 
-    /**
-     * @test
-     */
-    public function submitMultipleMinutes(): void
+    public function testSubmitMultipleMinutes(): void
     {
         $this->_submit([
             'minutes' => '0,13',
@@ -43,20 +37,14 @@ class CronExpressionTypeTextTest extends TypeTestCase
         ], '0,13 12 1 6 3');
     }
 
-    /**
-     * @test
-     */
-    public function submitMinutesOnly(): void
+    public function testSubmitMinutesOnly(): void
     {
         $this->_submit([
             'minutes' => '0',
         ], '0 * * * *');
     }
 
-    /**
-     * @test
-     */
-    public function submitEmpty(): void
+    public function testSubmitEmpty(): void
     {
         $this->_submit([], '* * * * *');
     }
@@ -86,10 +74,7 @@ class CronExpressionTypeTextTest extends TypeTestCase
         $this->assertSame($expected, $cronExpression->getExpression());
     }
 
-    /**
-     * @test
-     */
-    public function submitFaultyMinutesOnly(): void
+    public function testSubmitFaultyMinutesOnly(): void
     {
         $this->_submitFaultyData([
             'minutes' => '61',
@@ -111,10 +96,7 @@ class CronExpressionTypeTextTest extends TypeTestCase
         $this->assertFalse($form->isSynchronized());
     }
 
-    /**
-     * @test
-     */
-    public function createWithFaultyData(): void
+    public function testCreateWithFaultyData(): void
     {
         $data = new stdClass();
 
@@ -124,20 +106,14 @@ class CronExpressionTypeTextTest extends TypeTestCase
         ]);
     }
 
-    /**
-     * @test
-     */
-    public function submitChild(): void
+    public function testSubmitChild(): void
     {
         $this->_submitWithChild([
             'minutes' => '0',
         ], '0 * * * *');
     }
 
-    /**
-     * @test
-     */
-    public function submitNull(): void
+    public function testSubmitNull(): void
     {
         $this->_submitWithChild(null, '* * * * *');
     }

@@ -11,6 +11,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 
 final class SetonoCronExpressionExtensionWithDoctrineTest extends AbstractExtensionTestCase
 {
+    #[\Override]
     protected function getContainerExtensions(): array
     {
         return [
@@ -19,10 +20,7 @@ final class SetonoCronExpressionExtensionWithDoctrineTest extends AbstractExtens
         ];
     }
 
-    /**
-     * @test
-     */
-    public function loadServices(): void
+    public function testLoadServices(): void
     {
         $this->setParameter('kernel.debug', true);
         $this->load();

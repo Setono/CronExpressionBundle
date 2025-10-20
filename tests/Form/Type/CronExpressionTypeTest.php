@@ -10,12 +10,9 @@ use stdClass;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-class CronExpressionTypeTest extends TypeTestCase
+final class CronExpressionTypeTest extends TypeTestCase
 {
-    /**
-     * @test
-     */
-    public function submitWithAllSet(): void
+    public function testSubmitWithAllSet(): void
     {
         $this->_submit([
             'minutes' => ['0'],
@@ -26,10 +23,7 @@ class CronExpressionTypeTest extends TypeTestCase
         ], '0 12 1 6 3');
     }
 
-    /**
-     * @test
-     */
-    public function submitMultipleMinutes(): void
+    public function testSubmitMultipleMinutes(): void
     {
         $this->_submit([
             'minutes' => ['0', '13'],
@@ -40,20 +34,14 @@ class CronExpressionTypeTest extends TypeTestCase
         ], '0,13 12 1 6 3');
     }
 
-    /**
-     * @test
-     */
-    public function submitMinutesOnly(): void
+    public function testSubmitMinutesOnly(): void
     {
         $this->_submit([
             'minutes' => ['0'],
         ], '0 * * * *');
     }
 
-    /**
-     * @test
-     */
-    public function submitEmpty(): void
+    public function testSubmitEmpty(): void
     {
         $this->_submit([], '* * * * *');
     }
@@ -81,10 +69,7 @@ class CronExpressionTypeTest extends TypeTestCase
         $this->assertSame($expected, $cronExpression->getExpression());
     }
 
-    /**
-     * @test
-     */
-    public function createWithFaultyData(): void
+    public function testCreateWithFaultyData(): void
     {
         $data = new stdClass();
 

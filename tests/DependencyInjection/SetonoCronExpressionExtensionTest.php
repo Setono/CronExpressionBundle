@@ -9,6 +9,7 @@ use Setono\CronExpressionBundle\DependencyInjection\SetonoCronExpressionExtensio
 
 final class SetonoCronExpressionExtensionTest extends AbstractExtensionTestCase
 {
+    #[\Override]
     protected function getContainerExtensions(): array
     {
         return [
@@ -16,10 +17,7 @@ final class SetonoCronExpressionExtensionTest extends AbstractExtensionTestCase
         ];
     }
 
-    /**
-     * @test
-     */
-    public function loadServices(): void
+    public function testLoadServices(): void
     {
         $this->load();
 

@@ -27,6 +27,7 @@ final class CronExpressionType extends AbstractType
         $this->fieldFactory = new FieldFactory();
     }
 
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ('single_text' === $options['widget']) {
@@ -102,6 +103,7 @@ final class CronExpressionType extends AbstractType
         }
     }
 
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         $compound = function (Options $options): bool {
@@ -125,6 +127,7 @@ final class CronExpressionType extends AbstractType
         ]);
     }
 
+    #[\Override]
     public function getBlockPrefix(): string
     {
         return 'setono_cron_expression';

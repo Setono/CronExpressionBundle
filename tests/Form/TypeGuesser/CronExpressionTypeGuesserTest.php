@@ -14,71 +14,48 @@ final class CronExpressionTypeGuesserTest extends TestCase
 {
     private CronExpressionTypeGuesser $typeGuesser;
 
+    #[\Override]
     public function setUp(): void
     {
         $this->typeGuesser = new CronExpressionTypeGuesser();
     }
 
-    /**
-     * @test
-     */
-    public function it_returns_null_if_class_does_not_exist(): void
+    public function testItReturnsNullIfClassDoesNotExist(): void
     {
         $this->assertNull($this->typeGuesser->guessType('Class\\Does\\Not\\Exist', 'property'));
     }
 
-    /**
-     * @test
-     */
-    public function it_returns_null_if_no_phpdoc_is_present(): void
+    public function testItReturnsNullIfNoPhpdocIsPresent(): void
     {
         $this->assertNull($this->typeGuesser->guessType(StubWithNoPhpDoc::class, 'property'));
     }
 
-    /**
-     * @test
-     */
-    public function it_returns_null_if_property_doesnt_exist(): void
+    public function testItReturnsNullIfPropertyDoesntExist(): void
     {
         $this->assertNull($this->typeGuesser->guessType(StubWithNoPhpDoc::class, 'property2'));
     }
 
-    /**
-     * @test
-     */
-    public function it_returns_null_if_property_has_wrong_type(): void
+    public function testItReturnsNullIfPropertyHasWrongType(): void
     {
         $this->assertNull($this->typeGuesser->guessType(StubWithWrongType::class, 'property'));
     }
 
-    /**
-     * @test
-     */
-    public function it_guesses_type_when_type_is_a_fqcn(): void
+    public function testItGuessesTypeWhenTypeIsAFqcn(): void
     {
         $this->guess_type(StubFqcn::class);
     }
 
-    /**
-     * @test
-     */
-    public function it_guesses_type_when_type_is_an_alias(): void
+    public function testItGuessesTypeWhenTypeIsAnAlias(): void
     {
         $this->guess_type(StubAliased::class);
     }
 
-    /**
-     * @test
-     */
-    public function it_guesses_type_when_type_is_imported(): void
+    public function testItGuessesTypeWhenTypeIsImported(): void
     {
         $this->guess_type(StubImported::class);
     }
 
-    /**
-     * @test
-     */
-    public function it_guesses_type_when_type_is_hinted(): void
+    public function testItGuessesTypeWhenTypeIsHinted(): void
     {
         $this->guess_type(StubWithTypeHint::class);
     }

@@ -10,36 +10,24 @@ use stdClass;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Test\TypeTestCase;
 
-class CronExpressionTypeStringTest extends TypeTestCase
+final class CronExpressionTypeStringTest extends TypeTestCase
 {
-    /**
-     * @test
-     */
-    public function submitWithAllSet(): void
+    public function testSubmitWithAllSet(): void
     {
         $this->_submit('0 12 1 6 3', '0 12 1 6 3');
     }
 
-    /**
-     * @test
-     */
-    public function submitMultipleMinutes(): void
+    public function testSubmitMultipleMinutes(): void
     {
         $this->_submit('0,13 12 1 6 3', '0,13 12 1 6 3');
     }
 
-    /**
-     * @test
-     */
-    public function submitMinutesOnly(): void
+    public function testSubmitMinutesOnly(): void
     {
         $this->_submit('0 * * * *', '0 * * * *');
     }
 
-    /**
-     * @test
-     */
-    public function submitEmpty(): void
+    public function testSubmitEmpty(): void
     {
         $this->_submit(null, '* * * * *');
     }
@@ -62,18 +50,12 @@ class CronExpressionTypeStringTest extends TypeTestCase
         $this->assertSame($expected, $cronExpression->getExpression());
     }
 
-    /**
-     * @test
-     */
-    public function submitFaultyEmpty(): void
+    public function testSubmitFaultyEmpty(): void
     {
         $this->_submitFaultyData([]);
     }
 
-    /**
-     * @test
-     */
-    public function submitFaultyArray(): void
+    public function testSubmitFaultyArray(): void
     {
         $this->_submitFaultyData([
             'foo' => 'bar',
@@ -95,10 +77,7 @@ class CronExpressionTypeStringTest extends TypeTestCase
         $this->assertFalse($form->isSynchronized());
     }
 
-    /**
-     * @test
-     */
-    public function createWithFaultyData(): void
+    public function testCreateWithFaultyData(): void
     {
         $data = new stdClass();
 

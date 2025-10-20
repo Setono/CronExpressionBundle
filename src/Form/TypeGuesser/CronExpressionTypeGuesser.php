@@ -10,11 +10,13 @@ use Symfony\Component\Form\FormTypeGuesserInterface;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
 use Symfony\Component\Form\Guess\ValueGuess;
+use Symfony\Component\PropertyInfo\Extractor\ConstructorExtractor;
 use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 use Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface;
-use Symfony\Component\PropertyInfo\Type;
+use Symfony\Component\PropertyInfo\Type as LegacyType;
+use Symfony\Component\TypeInfo\Type;
 
 final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
 {
@@ -29,21 +31,15 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
      * @param string $class
      * @param string $property
      */
+    #[\Override]
     public function guessType($class, $property): ?TypeGuess
     {
         if (!class_exists($class)) {
             return null;
         }
 
-        $types = $this->extractor->getTypes($class, $property);
-        if (null === $types) {
-            return null;
-        }
-        foreach ($types as $type) {
-            if (Type::BUILTIN_TYPE_OBJECT === $type->getBuiltinType() &&
-                CronExpression::class === $type->getClassName()) {
-                return new TypeGuess(CronExpressionType::class, [], Guess::VERY_HIGH_CONFIDENCE);
-            }
+        if ($this->isCronExpression($class, $property)) {
+            return new TypeGuess(CronExpressionType::class, [], Guess::VERY_HIGH_CONFIDENCE);
         }
 
         return null;
@@ -53,6 +49,7 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
      * @param string $class
      * @param string $property
      */
+    #[\Override]
     public function guessRequired($class, $property): ?ValueGuess
     {
         return null;
@@ -62,6 +59,7 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
      * @param string $class
      * @param string $property
      */
+    #[\Override]
     public function guessMaxLength($class, $property): ?ValueGuess
     {
         return null;
@@ -71,6 +69,7 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
      * @param string $class
      * @param string $property
      */
+    #[\Override]
     public function guessPattern($class, $property): ?ValueGuess
     {
         return null;
@@ -78,9 +77,52 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
 
     private function createExtractor(): PropertyTypeExtractorInterface
     {
+        $docExtractor = new PhpDocExtractor();
+        $reflectionExtractor = new ReflectionExtractor();
+
         return new PropertyInfoExtractor([], [
-            new PhpDocExtractor(),
-            new ReflectionExtractor(),
-        ]);
+            $docExtractor,
+            $reflectionExtractor,
+            new ConstructorExtractor([
+                $docExtractor,
+                $reflectionExtractor,
+            ]),
+        ], [], [], [$reflectionExtractor]);
+    }
+
+    private function isCronExpression(string $class, string $property): bool
+    {
+        if (class_exists(Type::class) && method_exists($this->extractor, 'getType')) {
+            /**
+             * @psalm-suppress MixedAssignment
+             */
+            $type = $this->extractor->getType($class, $property);
+            if (null === $type) {
+                return false;
+            }
+            if ($type->isIdentifiedBy(CronExpression::class)) {
+                return true;
+            }
+        } else {
+            /**
+             * @psalm-suppress DeprecatedClass
+             * @psalm-suppress DeprecatedMethod
+             */
+            $types = $this->extractor->getTypes($class, $property);
+            if (null === $types) {
+                return false;
+            }
+            foreach ($types as $lType) {
+                /**
+                 * @psalm-suppress DeprecatedClass
+                 */
+                if (LegacyType::BUILTIN_TYPE_OBJECT === $lType->getBuiltinType() &&
+                    CronExpression::class === $lType->getClassName()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

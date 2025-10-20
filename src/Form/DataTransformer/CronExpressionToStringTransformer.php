@@ -18,6 +18,7 @@ final class CronExpressionToStringTransformer implements DataTransformerInterfac
     /**
      * @param mixed $value
      */
+    #[\Override]
     public function transform($value): ?string
     {
         if (null === $value) {
@@ -34,6 +35,7 @@ final class CronExpressionToStringTransformer implements DataTransformerInterfac
     /**
      * @param mixed $value
      */
+    #[\Override]
     public function reverseTransform($value): CronExpression
     {
         if (null === $value || '' === $value) {

@@ -10,11 +10,12 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
-class CronExpressionValidator extends ConstraintValidator
+final class CronExpressionValidator extends ConstraintValidator
 {
     /**
      * @param mixed $value
      */
+    #[\Override]
     public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof CronExpression) {

@@ -16,25 +16,16 @@ use stdClass;
 
 final class CronExpressionTypeTest extends TestCase
 {
-    /**
-     * @test
-     */
     public function testTypeName(): void
     {
         self::assertEquals('cron_expression', $this->getType()->getName());
     }
 
-    /**
-     * @test
-     */
     public function testTypeRequiresHint(): void
     {
         self::assertTrue($this->getType()->requiresSQLCommentHint($this->getPlatform()));
     }
 
-    /**
-     * @test
-     */
     public function testTypeColumn(): void
     {
         $length = 255;
@@ -44,40 +35,28 @@ final class CronExpressionTypeTest extends TestCase
         self::assertStringContainsString((string) $length, $sql);
     }
 
-    /**
-     * @test
-     */
-    public function convertToPhpNull(): void
+    public function testConvertToPhpNull(): void
     {
         $val = $this->getType()->convertToPHPValue(null, $this->getPlatform());
 
         self::assertNull($val);
     }
 
-    /**
-     * @test
-     */
-    public function convertEmptyToPhpNull(): void
+    public function testConvertEmptyToPhpNull(): void
     {
         $val = $this->getType()->convertToPHPValue('', $this->getPlatform());
 
         self::assertNull($val);
     }
 
-    /**
-     * @test
-     */
-    public function convertToPhpReturnsCronExpression(): void
+    public function testConvertToPhpReturnsCronExpression(): void
     {
         $val = $this->getType()->convertToPHPValue('@daily', $this->getPlatform());
 
         self::assertInstanceOf(CronExpression::class, $val);
     }
 
-    /**
-     * @test
-     */
-    public function convertFaultyTypeToPhpThrowsException(): void
+    public function testConvertFaultyTypeToPhpThrowsException(): void
     {
         self::expectException(ConversionException::class);
         if (class_exists(InvalidType::class)) {
@@ -90,10 +69,7 @@ final class CronExpressionTypeTest extends TestCase
         $this->getType()->convertToPHPValue(new stdClass(), $this->getPlatform());
     }
 
-    /**
-     * @test
-     */
-    public function convertFaultyStringToPhpThrowsException(): void
+    public function testConvertFaultyStringToPhpThrowsException(): void
     {
         self::expectException(ConversionException::class);
         if (class_exists(ValueNotConvertible::class)) {
@@ -106,20 +82,14 @@ final class CronExpressionTypeTest extends TestCase
         $this->getType()->convertToPHPValue('@never', $this->getPlatform());
     }
 
-    /**
-     * @test
-     */
-    public function convertToDatabaseReturnsString(): void
+    public function testConvertToDatabaseReturnsString(): void
     {
         $val = $this->getType()->convertToDatabaseValue(CronExpression::factory('0 0 * * *'), $this->getPlatform());
 
         self::assertSame('0 0 * * *', $val);
     }
 
-    /**
-     * @test
-     */
-    public function convertToDatabaseNull(): void
+    public function testConvertToDatabaseNull(): void
     {
         $val = $this->getType()->convertToDatabaseValue(null, $this->getPlatform());
         self::assertNull($val);
