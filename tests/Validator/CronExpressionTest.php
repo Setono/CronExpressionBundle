@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Setono\CronExpressionBundle\Tests\Validator;
 
 use Cron\CronExpression;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Setono\CronExpressionBundle\Validator\CronExpression as Constraint;
 use Setono\CronExpressionBundle\Validator\CronExpressionValidator;
 use stdClass;
@@ -70,6 +71,7 @@ final class CronExpressionTest extends ConstraintValidatorTestCase
      *
      * @param mixed $value
      */
+    #[DataProvider('getInvalidValues')]
     public function testInvalidValues($value, string $valueAsString): void
     {
         $constraint = new Constraint('myMessage');
