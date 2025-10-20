@@ -70,6 +70,7 @@ final class CronExpressionTest extends ConstraintValidatorTestCase
      * @dataProvider getInvalidValues
      *
      * @param mixed $value
+     * @psalm-suppress UndefinedAttributeClass
      */
     #[DataProvider('getInvalidValues')]
     public function testInvalidValues($value, string $valueAsString): void
