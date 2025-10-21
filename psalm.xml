@@ -47,5 +47,10 @@
                 <directory name="src/Doctrine/DBAL/Types" />
             </errorLevel>
         </UnusedParam>
+        <ClassMustBeFinal>
+            <errorLevel type="suppress">
+                <directory name="src/Validator" />
+            </errorLevel>
+        </ClassMustBeFinal>
     </issueHandlers>
 </psalm>
