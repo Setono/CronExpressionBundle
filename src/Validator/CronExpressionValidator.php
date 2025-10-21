@@ -10,6 +10,9 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
+/**
+ * @api
+ */
 class CronExpressionValidator extends ConstraintValidator
 {
     /**
