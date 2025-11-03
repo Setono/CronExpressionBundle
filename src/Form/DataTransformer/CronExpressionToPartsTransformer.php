@@ -47,7 +47,7 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param array<string, array<string>>|null $value
+     * @param mixed $value
      */
     #[\Override]
     public function reverseTransform($value): CronExpression
@@ -68,7 +68,7 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
             throw $exception;
         }
 
-        if (array_any($value, fn (mixed $s) => !is_array($s) || array_any($s, fn (mixed $o) => !is_scalar($o)))) {
+        if (!self::allArrayScalar($value)) {
             throw $exception;
         }
 
@@ -87,6 +87,19 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
         }
     }
 
+    /**
+     * @psalm-pure
+     *
+     * @psalm-assert array<string, array<scalar>> $value
+     */
+    private static function allArrayScalar(array $value): bool
+    {
+        return array_all($value, fn (mixed $s) => is_array($s) && array_all($s, fn (mixed $o) => is_scalar($o)));
+    }
+
+    /**
+     * @param array<scalar> $cronArray
+     */
     private function convertCronParts(array $cronArray): string
     {
         if ([] === $cronArray) {

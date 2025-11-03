@@ -47,7 +47,7 @@ final class CronExpressionToStringPartsTransformer implements DataTransformerInt
     }
 
     /**
-     * @param array<string,string>|null $value
+     * @param mixed $value
      */
     #[\Override]
     public function reverseTransform($value): CronExpression
@@ -68,7 +68,7 @@ final class CronExpressionToStringPartsTransformer implements DataTransformerInt
             throw $exception;
         }
 
-        if (!array_all($value, fn (mixed $s) => is_string($s))) {
+        if (!self::allString($value)) {
             throw $exception;
         }
 
@@ -85,5 +85,15 @@ final class CronExpressionToStringPartsTransformer implements DataTransformerInt
         }
 
         return $cronExpression;
+    }
+
+    /**
+     * @psalm-pure
+     *
+     * @psalm-assert iterable<string> $value
+     */
+    private static function allString(array $value): bool
+    {
+        return array_all($value, fn (mixed $s) => is_string($s));
     }
 }
