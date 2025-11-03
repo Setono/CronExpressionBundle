@@ -47,7 +47,7 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param mixed $value
+     * @param array<string, array<string>>|null $value
      */
     #[\Override]
     public function reverseTransform($value): CronExpression
@@ -68,7 +68,7 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
             throw $exception;
         }
 
-        if (array_any($value, fn($s) => !is_array($s) || array_any($s, fn($o) => !is_scalar($o)))) {
+        if (array_any($value, fn (mixed $s) => !is_array($s) || array_any($s, fn (mixed $o) => !is_scalar($o)))) {
             throw $exception;
         }
 
