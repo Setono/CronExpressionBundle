@@ -21,6 +21,9 @@ if (class_exists(Type::class)) {
 if (version_compare(PHP_VERSION, '8.3.0', '>=')) {
     $config->ignoreErrorsOnPackage('symfony/polyfill-php83', [ErrorType::UNUSED_DEPENDENCY]);
 }
+if (version_compare(PHP_VERSION, '8.4.0', '>=')) {
+    $config->ignoreErrorsOnPackage('symfony/polyfill-php84', [ErrorType::UNUSED_DEPENDENCY]);
+}
 
 if (!class_exists(DataProvider::class)) {
     $config->ignoreUnknownClasses([DataProvider::class]);
