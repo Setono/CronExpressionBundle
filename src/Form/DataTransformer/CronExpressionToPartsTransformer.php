@@ -7,7 +7,6 @@ namespace Setono\CronExpressionBundle\Form\DataTransformer;
 use Cron\CronExpression;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use Webmozart\Assert\Assert;
 
 /**
  * @template-implements DataTransformerInterface<CronExpression, array<string, array<string>>>
@@ -69,9 +68,7 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
             throw $exception;
         }
 
-        try {
-            Assert::allIsArray($value);
-        } catch (\InvalidArgumentException $e) {
+        if (!self::allArrayScalar($value)) {
             throw $exception;
         }
 
@@ -90,13 +87,22 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
         }
     }
 
+    /**
+     * @psalm-assert array<string, array<scalar>> $value
+     */
+    private static function allArrayScalar(array $value): bool
+    {
+        return array_all($value, fn (mixed $s) => is_array($s) && array_all($s, fn (mixed $o) => is_scalar($o)));
+    }
+
+    /**
+     * @param array<scalar> $cronArray
+     */
     private function convertCronParts(array $cronArray): string
     {
         if ([] === $cronArray) {
             return '*';
         }
-
-        Assert::allScalar($cronArray);
 
         return implode(',', $cronArray);
     }

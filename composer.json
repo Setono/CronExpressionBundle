@@ -19,10 +19,10 @@
         "symfony/form": "^5.4 || ^6.0 || ^7.0",
         "symfony/http-kernel": "^5.4 || ^6.0 || ^7.0",
         "symfony/options-resolver": "^5.4 || ^6.0 || ^7.0",
-        "symfony/polyfill-php83": "^1.27",
+        "symfony/polyfill-php83": "^1.33",
+        "symfony/polyfill-php84": "^1.33",
         "symfony/property-info": "^5.4 || ^6.0 || ^7.0",
-        "symfony/validator": "^5.4 || ^6.0 || ^7.0",
-        "webmozart/assert": "^1.10"
+        "symfony/validator": "^5.4 || ^6.0 || ^7.0"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.42",

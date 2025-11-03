@@ -7,7 +7,6 @@ namespace Setono\CronExpressionBundle\Form\DataTransformer;
 use Cron\CronExpression;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use Webmozart\Assert\Assert;
 
 /**
  * @template-implements DataTransformerInterface<CronExpression, array<string,string>>
@@ -69,9 +68,7 @@ final class CronExpressionToStringPartsTransformer implements DataTransformerInt
             throw $exception;
         }
 
-        try {
-            Assert::allString($value);
-        } catch (\InvalidArgumentException $e) {
+        if (!self::allString($value)) {
             throw $exception;
         }
 
@@ -88,5 +85,13 @@ final class CronExpressionToStringPartsTransformer implements DataTransformerInt
         }
 
         return $cronExpression;
+    }
+
+    /**
+     * @psalm-assert iterable<string> $value
+     */
+    private static function allString(array $value): bool
+    {
+        return array_all($value, fn (mixed $s) => is_string($s));
     }
 }
