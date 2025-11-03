@@ -88,8 +88,6 @@ final class CronExpressionToStringPartsTransformer implements DataTransformerInt
     }
 
     /**
-     * @psalm-pure
-     *
      * @psalm-assert iterable<string> $value
      */
     private static function allString(array $value): bool

@@ -88,8 +88,6 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
     }
 
     /**
-     * @psalm-pure
-     *
      * @psalm-assert array<string, array<scalar>> $value
      */
     private static function allArrayScalar(array $value): bool
