@@ -162,6 +162,10 @@ jobs:
                 exclude:
                     -   php-version: "8.1"
                         symfony: "^7.0"
+                include:
+                    -   php-version: '8.4'
+                        symfony: '^8.0.0-BETA-1'
+                        composer-minimum-stability: beta
 
         steps:
             -   name: "Checkout"
@@ -174,6 +178,10 @@ jobs:
                     extensions: "${{ env.PHP_EXTENSIONS }}"
                     coverage: "none"
                     tools: "flex"
+
+            -   name: "Configure Composer minimum stability"
+                if: matrix.composer-minimum-stability != ''
+                run: composer config minimum-stability ${{ matrix.composer-minimum-stability }}
 
             -   name: "Install composer dependencies"
                 uses: "ramsey/composer-install@v3"
