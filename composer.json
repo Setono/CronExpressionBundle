@@ -32,8 +32,7 @@
         "roave/security-advisories": "dev-latest",
         "shipmonk/composer-dependency-analyser": "^1.8",
         "sylius-labs/coding-standard": "^4.1.1",
-        "symplify/easy-coding-standard": "^12.3.6",
-        "vimeo/psalm": "^6.0"
+        "symplify/easy-coding-standard": "^12.3.6"
     },
     "prefer-stable": true,
     "autoload": {
