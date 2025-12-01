@@ -10,8 +10,6 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * @template-implements DataTransformerInterface<CronExpression, array<string, array<string>>>
- *
- * @psalm-suppress TooManyTemplateParams
  */
 final class CronExpressionToPartsTransformer implements DataTransformerInterface
 {
@@ -87,9 +85,6 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
         }
     }
 
-    /**
-     * @psalm-assert array<string, array<scalar>> $value
-     */
     private static function allArrayScalar(array $value): bool
     {
         return array_all($value, fn (mixed $s) => is_array($s) && array_all($s, fn (mixed $o) => is_scalar($o)));

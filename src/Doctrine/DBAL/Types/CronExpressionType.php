@@ -34,9 +34,6 @@ final class CronExpressionType extends Type
         }
 
         if (!is_string($value)) {
-            /**
-             * @psalm-suppress UndefinedMethod
-             */
             throw class_exists(InvalidType::class) ? InvalidType::new($value, CronExpression::class, ['string']) : ConversionException::conversionFailedInvalidType($value, CronExpression::class, ['string']);
         }
 
@@ -47,9 +44,6 @@ final class CronExpressionType extends Type
         try {
             return CronExpression::factory($value);
         } catch (\Throwable $e) {
-            /**
-             * @psalm-suppress UndefinedMethod
-             */
             throw class_exists(ValueNotConvertible::class) ? ValueNotConvertible::new($value, CronExpression::class, null, $e) : ConversionException::conversionFailed($value, CronExpression::class, $e);
         }
     }

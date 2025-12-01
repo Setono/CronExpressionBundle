@@ -29,7 +29,6 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.3 || ^5.0 || ^6.0",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpunit/phpunit": "^9.5 || ^12.0",
-        "psalm/plugin-phpunit": "^0.19",
         "roave/security-advisories": "dev-latest",
         "shipmonk/composer-dependency-analyser": "^1.8",
         "sylius-labs/coding-standard": "^4.1.1",
