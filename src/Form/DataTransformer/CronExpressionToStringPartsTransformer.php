@@ -10,8 +10,6 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * @template-implements DataTransformerInterface<CronExpression, array<string,string>>
- *
- * @psalm-suppress TooManyTemplateParams
  */
 final class CronExpressionToStringPartsTransformer implements DataTransformerInterface
 {
@@ -88,7 +86,9 @@ final class CronExpressionToStringPartsTransformer implements DataTransformerInt
     }
 
     /**
-     * @psalm-assert iterable<string> $value
+     * @phpstan-assert array<string> $value
+     *
+     * @phpstan-ignore missingType.iterableValue
      */
     private static function allString(array $value): bool
     {

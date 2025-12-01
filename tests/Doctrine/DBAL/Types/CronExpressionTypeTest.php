@@ -18,7 +18,7 @@ final class CronExpressionTypeTest extends TestCase
 {
     public function testTypeName(): void
     {
-        self::assertEquals('cron_expression', $this->getType()->getName());
+        self::assertSame('cron_expression', $this->getType()->getName());
     }
 
     public function testTypeRequiresHint(): void
@@ -60,9 +60,6 @@ final class CronExpressionTypeTest extends TestCase
     {
         self::expectException(ConversionException::class);
         if (class_exists(InvalidType::class)) {
-            /**
-             * @psalm-suppress InvalidArgument
-             */
             self::expectException(InvalidType::class);
         }
 
@@ -73,9 +70,6 @@ final class CronExpressionTypeTest extends TestCase
     {
         self::expectException(ConversionException::class);
         if (class_exists(ValueNotConvertible::class)) {
-            /**
-             * @psalm-suppress InvalidArgument
-             */
             self::expectException(ValueNotConvertible::class);
         }
 

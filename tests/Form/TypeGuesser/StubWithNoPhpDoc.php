@@ -6,6 +6,6 @@ namespace Setono\CronExpressionBundle\Tests\Form\TypeGuesser;
 
 final class StubWithNoPhpDoc
 {
-    /** @psalm-suppress MissingPropertyType */
+    /** @phpstan-ignore property.unused,missingType.property */
     private $property;
 }

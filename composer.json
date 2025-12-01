@@ -12,29 +12,33 @@
     "require": {
         "php": ">=8.1",
         "doctrine/dbal": "^3.4 || ^4.0",
-        "doctrine/doctrine-bundle": "^1.9 || ^2.0 || ^3.0",
+        "doctrine/doctrine-bundle": "^1.9 || ^2.0 || ^3.0 || ^4.0",
         "dragonmantank/cron-expression": "^2.2 || ^3.0",
-        "symfony/config": "^5.4 || ^6.0 || ^7.0",
-        "symfony/dependency-injection": "^5.4 || ^6.0 || ^7.0",
-        "symfony/form": "^5.4 || ^6.0 || ^7.0",
-        "symfony/http-kernel": "^5.4 || ^6.0 || ^7.0",
-        "symfony/options-resolver": "^5.4 || ^6.0 || ^7.0",
+        "symfony/config": "^5.4.22 || ^6.4 || ^7.0 || ^8.0",
+        "symfony/dependency-injection": "^5.4.22 || ^6.4 || ^7.0 || ^8.0",
+        "symfony/form": "^5.4.22 || ^6.4 || ^7.0 || ^8.0",
+        "symfony/http-kernel": "^5.4.22 || ^6.4 || ^7.0 || ^8.0",
+        "symfony/options-resolver": "^5.4.22 || ^6.4 || ^7.0 || ^8.0",
         "symfony/polyfill-php83": "^1.33",
         "symfony/polyfill-php84": "^1.33",
-        "symfony/property-info": "^5.4 || ^6.0 || ^7.0",
-        "symfony/validator": "^5.4 || ^6.0 || ^7.0"
+        "symfony/property-info": "^5.4.22 || ^6.4 || ^7.0 || ^8.0",
+        "symfony/validator": "^5.4.22 || ^6.4 || ^7.0 || ^8.0"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "^2.42",
+        "ergebnis/composer-normalize": "^2.45",
         "matthiasnoback/symfony-dependency-injection-test": "^4.3 || ^5.0 || ^6.0",
         "phpdocumentor/reflection-docblock": "^5.3",
-        "phpunit/phpunit": "^9.5 || ^12.0",
-        "psalm/plugin-phpunit": "^0.19",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpdoc-parser": "^1.0 || ^2.0",
+        "phpstan/phpstan": "^1.0 || ^2.0",
+        "phpstan/phpstan-phpunit": "^1.0 || ^2.0",
+        "phpstan/phpstan-strict-rules": "^1.0 || ^2.0",
+        "phpstan/phpstan-symfony": "^1.0 || ^2.0",
+        "phpunit/phpunit": "^10.5 || ^11.0.1 || ^12.0",
         "roave/security-advisories": "dev-latest",
         "shipmonk/composer-dependency-analyser": "^1.8",
         "sylius-labs/coding-standard": "^4.1.1",
-        "symplify/easy-coding-standard": "^12.3.6",
-        "vimeo/psalm": "^6.0"
+        "symplify/easy-coding-standard": "^12.3.6 || ^13.0.0"
     },
     "prefer-stable": true,
     "autoload": {
@@ -50,7 +54,8 @@
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": false,
-            "ergebnis/composer-normalize": true
+            "ergebnis/composer-normalize": true,
+            "phpstan/extension-installer": true
         },
         "sort-packages": true
     },

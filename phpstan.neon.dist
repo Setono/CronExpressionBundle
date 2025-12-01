@@ -1,0 +1,23 @@
+includes:
+    - phpstan-baseline.neon
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+
+parameters:
+    level: 8
+    paths:
+        - src
+        - tests
+    scanFiles:
+        - vendor/symfony/dependency-injection/Loader/Configurator/ContainerConfigurator.php
+    treatPhpDocTypesAsCertain: false
+    checkInternalClassCaseSensitivity: true
+    checkMissingVarTagTypehint: true
+    checkMissingTypehints: true
+    checkUninitializedProperties: true
+    featureToggles:
+        skipCheckGenericClasses:
+            - Symfony\Component\Form\AbstractType
+            - Symfony\Component\Form\FormBuilderInterface
+            - Symfony\Component\Form\FormInterface
+            - Symfony\Component\Form\FormTypeExtensionInterface
+            - Symfony\Component\Form\FormTypeInterface

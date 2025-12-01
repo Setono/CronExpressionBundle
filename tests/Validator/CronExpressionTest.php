@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 /**
  * @template-extends ConstraintValidatorTestCase<CronExpressionValidator>
  *
- * @psalm-suppress TooManyTemplateParams
+ * @phpstan-ignore generics.notGeneric
  */
 final class CronExpressionTest extends ConstraintValidatorTestCase
 {
@@ -70,8 +70,6 @@ final class CronExpressionTest extends ConstraintValidatorTestCase
      * @dataProvider getInvalidValues
      *
      * @param mixed $value
-     *
-     * @psalm-suppress UndefinedAttributeClass
      */
     #[DataProvider('getInvalidValues')]
     public function testInvalidValues($value, string $valueAsString): void
@@ -80,13 +78,9 @@ final class CronExpressionTest extends ConstraintValidatorTestCase
 
         $this->validator->validate($value, $constraint);
 
-        /** @psalm-suppress InternalMethod,MixedMethodCall */
         $this->buildViolation('myMessage')->setParameter('{{ value }}', $valueAsString)->assertRaised();
     }
 
-    /**
-     * @psalm-return list<array{0: int|string, 1: string}>
-     */
     public static function getInvalidValues(): array
     {
         return [

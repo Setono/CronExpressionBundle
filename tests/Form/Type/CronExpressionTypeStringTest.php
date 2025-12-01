@@ -41,13 +41,13 @@ final class CronExpressionTypeStringTest extends TypeTestCase
         // submit the data to the form directly
         $form->submit($formData);
 
-        $this->assertTrue($form->isSynchronized());
+        self::assertTrue($form->isSynchronized());
 
         /** @var CronExpression $cronExpression */
         $cronExpression = $form->getData();
 
-        $this->assertInstanceOf(CronExpression::class, $cronExpression);
-        $this->assertSame($expected, $cronExpression->getExpression());
+        self::assertInstanceOf(CronExpression::class, $cronExpression);
+        self::assertSame($expected, $cronExpression->getExpression());
     }
 
     public function testSubmitFaultyEmpty(): void
@@ -63,9 +63,9 @@ final class CronExpressionTypeStringTest extends TypeTestCase
     }
 
     /**
-     * @param string|array|null $formData
+     * @phpstan-ignore missingType.iterableValue
      */
-    private function _submitFaultyData($formData): void
+    private function _submitFaultyData(array|string|null $formData): void
     {
         $form = $this->factory->create(CronExpressionType::class, null, [
             'widget' => 'single_text',
@@ -74,7 +74,7 @@ final class CronExpressionTypeStringTest extends TypeTestCase
         // submit the data to the form directly
         $form->submit($formData);
 
-        $this->assertFalse($form->isSynchronized());
+        self::assertFalse($form->isSynchronized());
     }
 
     public function testCreateWithFaultyData(): void

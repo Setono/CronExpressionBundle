@@ -57,6 +57,7 @@ jobs:
                     - "8.2"
                     - "8.3"
                     - "8.4"
+                    - "8.5"
 
                 dependencies:
                     - "highest"
@@ -69,6 +70,11 @@ jobs:
                 exclude:
                     -   php-version: "8.1"
                         symfony: "^7.0"
+                include:
+                    -   php-version: '8.4'
+                        symfony: '^8.0'
+                    -   php-version: '8.5'
+                        symfony: '^8.0'
         steps:
             -   name: "Checkout"
                 uses: "actions/checkout@v4"
@@ -103,6 +109,7 @@ jobs:
                     - "8.2"
                     - "8.3"
                     - "8.4"
+                    - "8.5"
 
                 dependencies:
                     - "highest"
@@ -115,6 +122,11 @@ jobs:
                 exclude:
                     -   php-version: "8.1"
                         symfony: "^7.0"
+                include:
+                    -   php-version: '8.4'
+                        symfony: '^8.0'
+                    -   php-version: '8.5'
+                        symfony: '^8.0'
         steps:
             -   name: "Checkout"
                 uses: "actions/checkout@v4"
@@ -122,9 +134,9 @@ jobs:
             -   name: "Setup PHP, with composer and extensions"
                 uses: "shivammathur/setup-php@v2"
                 with:
-                    php-version: "${{ matrix.php-version }}"
-                    extensions: "${{ env.PHP_EXTENSIONS }}"
                     coverage: "none"
+                    extensions: "${{ env.PHP_EXTENSIONS }}"
+                    php-version: "${{ matrix.php-version }}"
                     tools: "flex"
 
             -   name: "Install composer dependencies"
@@ -135,7 +147,7 @@ jobs:
                     dependency-versions: "${{ matrix.dependencies }}"
 
             -   name: "Static analysis"
-                run: "vendor/bin/psalm --php-version=${{ matrix.php-version }}"
+                run: "vendor/bin/phpstan --no-progress --memory-limit=1G analyse --error-format=github"
 
     unit-tests:
         name: "Unit tests"
@@ -149,6 +161,7 @@ jobs:
                     - "8.2"
                     - "8.3"
                     - "8.4"
+                    - "8.5"
 
                 dependencies:
                     - "lowest"
@@ -162,6 +175,11 @@ jobs:
                 exclude:
                     -   php-version: "8.1"
                         symfony: "^7.0"
+                include:
+                    -   php-version: '8.4'
+                        symfony: '^8.0'
+                    -   php-version: '8.5'
+                        symfony: '^8.0'
 
         steps:
             -   name: "Checkout"
@@ -171,8 +189,6 @@ jobs:
                 uses: "shivammathur/setup-php@v2"
                 with:
                     php-version: "${{ matrix.php-version }}"
-                    extensions: "${{ env.PHP_EXTENSIONS }}"
-                    coverage: "none"
                     tools: "flex"
 
             -   name: "Install composer dependencies"
@@ -193,7 +209,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.4"
+                    - "8.5"
 
                 dependencies:
                     - "highest"

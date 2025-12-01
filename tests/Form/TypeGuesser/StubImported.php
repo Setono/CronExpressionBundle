@@ -8,6 +8,10 @@ use Cron\CronExpression;
 
 final class StubImported
 {
-    /** @var CronExpression */
+    /**
+     * @var CronExpression
+     *
+     * @phpstan-ignore property.unused
+     */
     private $property;
 }

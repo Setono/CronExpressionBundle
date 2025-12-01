@@ -136,6 +136,8 @@ final class CronExpressionType extends AbstractType
     /**
      * Will create an array where the first key is 1
      * oneIndexedRange(3) will return [1 => 1, 2 => 2, 3 => 3].
+     *
+     * @return array<int, int>
      */
     private function oneIndexedRange(int $end, int $start = 0): array
     {
@@ -147,11 +149,10 @@ final class CronExpressionType extends AbstractType
 
     protected function buildCallback(int $payload): Callback
     {
-        // helper function for Symfony 4.4
-        return new Callback([
-            'callback' => [$this, 'validateCronField'],
-            'payload' => $payload,
-        ]);
+        return new Callback(
+            callback: $this->validateCronField(...),
+            payload: $payload,
+        );
     }
 
     public function validateCronField(?string $value, ExecutionContextInterface $context, int $payload): void

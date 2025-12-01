@@ -90,12 +90,13 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
         ], [], [], [$reflectionExtractor]);
     }
 
+    /**
+     * @param class-string $class
+     */
     private function isCronExpression(string $class, string $property): bool
     {
+        /** @phpstan-ignore function.alreadyNarrowedType */
         if (class_exists(Type::class) && method_exists($this->extractor, 'getType')) {
-            /**
-             * @psalm-suppress MixedAssignment
-             */
             $type = $this->extractor->getType($class, $property);
             if (null === $type) {
                 return false;
@@ -104,18 +105,13 @@ final class CronExpressionTypeGuesser implements FormTypeGuesserInterface
                 return true;
             }
         } else {
-            /**
-             * @psalm-suppress DeprecatedClass
-             * @psalm-suppress DeprecatedMethod
-             */
+            /** @phpstan-ignore method.notFound */
             $types = $this->extractor->getTypes($class, $property);
             if (null === $types) {
                 return false;
             }
             foreach ($types as $lType) {
-                /**
-                 * @psalm-suppress DeprecatedClass
-                 */
+                /** @phpstan-ignore class.notFound */
                 if (LegacyType::BUILTIN_TYPE_OBJECT === $lType->getBuiltinType() &&
                     CronExpression::class === $lType->getClassName()) {
                     return true;

@@ -6,6 +6,10 @@ namespace Setono\CronExpressionBundle\Tests\Form\TypeGuesser;
 
 final class StubWithWrongType
 {
-    /** @var \DateTime */
+    /**
+     * @var \DateTime
+     *
+     * @phpstan-ignore property.unused
+     */
     private $property;
 }
