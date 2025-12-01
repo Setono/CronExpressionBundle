@@ -12,8 +12,6 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 /**
  * @template-extends ConstraintValidatorTestCase<CallbackValidator>
- *
- * @psalm-suppress TooManyTemplateParams
  */
 final class FormCallbackTest extends ConstraintValidatorTestCase
 {
@@ -39,16 +37,14 @@ final class FormCallbackTest extends ConstraintValidatorTestCase
     {
         $value = '61';
         $this->validator->validate($value, $this->createConstraint(CronExpression::MINUTE));
-        /** @psalm-suppress InternalMethod,MixedMethodCall */
         $this->buildViolation('{{value}} is not a valid cron part')->setParameter('value', $value)->assertRaised();
     }
 
     protected function createConstraint(int $payload): Callback
     {
-        // helper function for Symfony 4.4
-        return new Callback([
-            'callback' => [new CronExpressionType(), 'validateCronField'],
-            'payload' => $payload,
-        ]);
+        return new Callback(
+            callback: [new CronExpressionType(), 'validateCronField'],
+            payload: $payload,
+        );
     }
 }

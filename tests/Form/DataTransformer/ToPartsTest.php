@@ -71,6 +71,6 @@ final class ToPartsTest extends TestCase
     protected function expectedReverseTransform(mixed $input, string $expected): void
     {
         $transformer = new CronExpressionToPartsTransformer();
-        $this->assertSame($expected, $transformer->reverseTransform($input)->getExpression());
+        self::assertSame($expected, $transformer->reverseTransform($input)->getExpression());
     }
 }

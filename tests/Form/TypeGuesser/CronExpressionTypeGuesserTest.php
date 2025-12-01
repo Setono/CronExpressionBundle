@@ -22,22 +22,22 @@ final class CronExpressionTypeGuesserTest extends TestCase
 
     public function testItReturnsNullIfClassDoesNotExist(): void
     {
-        $this->assertNull($this->typeGuesser->guessType('Class\\Does\\Not\\Exist', 'property'));
+        self::assertNull($this->typeGuesser->guessType('Class\\Does\\Not\\Exist', 'property'));
     }
 
     public function testItReturnsNullIfNoPhpdocIsPresent(): void
     {
-        $this->assertNull($this->typeGuesser->guessType(StubWithNoPhpDoc::class, 'property'));
+        self::assertNull($this->typeGuesser->guessType(StubWithNoPhpDoc::class, 'property'));
     }
 
     public function testItReturnsNullIfPropertyDoesntExist(): void
     {
-        $this->assertNull($this->typeGuesser->guessType(StubWithNoPhpDoc::class, 'property2'));
+        self::assertNull($this->typeGuesser->guessType(StubWithNoPhpDoc::class, 'property2'));
     }
 
     public function testItReturnsNullIfPropertyHasWrongType(): void
     {
-        $this->assertNull($this->typeGuesser->guessType(StubWithWrongType::class, 'property'));
+        self::assertNull($this->typeGuesser->guessType(StubWithWrongType::class, 'property'));
     }
 
     public function testItGuessesTypeWhenTypeIsAFqcn(): void
@@ -62,16 +62,16 @@ final class CronExpressionTypeGuesserTest extends TestCase
 
     protected function guess_type(string $class): void
     {
-        $this->assertCorrectGuess($this->typeGuesser->guessType($class, 'property'));
-        $this->assertNull($this->typeGuesser->guessRequired($class, 'property'));
-        $this->assertNull($this->typeGuesser->guessMaxLength($class, 'property'));
-        $this->assertNull($this->typeGuesser->guessPattern($class, 'property'));
+        self::assertCorrectGuess($this->typeGuesser->guessType($class, 'property'));
+        self::assertNull($this->typeGuesser->guessRequired($class, 'property'));
+        self::assertNull($this->typeGuesser->guessMaxLength($class, 'property'));
+        self::assertNull($this->typeGuesser->guessPattern($class, 'property'));
     }
 
-    private function assertCorrectGuess(?TypeGuess $res): void
+    static private function assertCorrectGuess(?TypeGuess $res): void
     {
-        $this->assertNotNull($res);
-        $this->assertSame(CronExpressionType::class, $res->getType());
-        $this->assertSame(Guess::VERY_HIGH_CONFIDENCE, $res->getConfidence());
+        self::assertNotNull($res);
+        self::assertSame(CronExpressionType::class, $res->getType());
+        self::assertSame(Guess::VERY_HIGH_CONFIDENCE, $res->getConfidence());
     }
 }

@@ -85,6 +85,10 @@ final class CronExpressionToStringPartsTransformer implements DataTransformerInt
         return $cronExpression;
     }
 
+    /**
+     * @phpstan-assert array<string> $value
+     * @phpstan-ignore missingType.iterableValue
+     */
     private static function allString(array $value): bool
     {
         return array_all($value, fn (mixed $s) => is_string($s));

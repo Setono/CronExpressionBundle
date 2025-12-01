@@ -23,12 +23,11 @@ class CronExpression extends Constraint
      * @param string[]|null $groups
      */
     public function __construct(
-        string $message = null,
+        ?string $message = null,
         ?array $groups = null,
-        mixed $payload = null,
-        array $options = [],
+        mixed $payload = null
     ) {
-        parent::__construct($options, $groups, $payload);
+        parent::__construct(null, $groups, $payload);
 
         $this->message = $message ?? $this->message;
     }

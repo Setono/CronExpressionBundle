@@ -85,6 +85,10 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
         }
     }
 
+    /**
+     * @phpstan-assert array<string, array<scalar>> $value
+     * @phpstan-ignore missingType.iterableValue
+     */
     private static function allArrayScalar(array $value): bool
     {
         return array_all($value, fn (mixed $s) => is_array($s) && array_all($s, fn (mixed $o) => is_scalar($o)));

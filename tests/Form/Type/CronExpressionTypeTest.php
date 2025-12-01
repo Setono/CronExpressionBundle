@@ -46,6 +46,9 @@ final class CronExpressionTypeTest extends TypeTestCase
         $this->_submit([], '* * * * *');
     }
 
+    /**
+     * @param array<string, array<string>> $formData
+     */
     private function _submit(array $formData, string $expected): void
     {
         $form = $this->factory->create(CronExpressionType::class);
@@ -53,20 +56,20 @@ final class CronExpressionTypeTest extends TypeTestCase
         // submit the data to the form directly
         $form->submit($formData);
 
-        $this->assertTrue($form->isSynchronized());
+        self::assertTrue($form->isSynchronized());
 
         $view = $form->createView();
         $children = $view->children;
 
         foreach (array_keys($formData) as $key) {
-            $this->assertArrayHasKey($key, $children);
+            self::assertArrayHasKey($key, $children);
         }
 
         /** @var CronExpression $cronExpression */
         $cronExpression = $form->getData();
 
-        $this->assertInstanceOf(CronExpression::class, $cronExpression);
-        $this->assertSame($expected, $cronExpression->getExpression());
+        self::assertInstanceOf(CronExpression::class, $cronExpression);
+        self::assertSame($expected, $cronExpression->getExpression());
     }
 
     public function testCreateWithFaultyData(): void

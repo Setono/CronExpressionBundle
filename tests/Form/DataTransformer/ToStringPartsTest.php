@@ -60,6 +60,6 @@ final class ToStringPartsTest extends TestCase
     protected function expectedReverseTransform(mixed $input, string $expected): void
     {
         $transformer = new CronExpressionToStringPartsTransformer();
-        $this->assertSame($expected, $transformer->reverseTransform($input)->getExpression());
+        self::assertSame($expected, $transformer->reverseTransform($input)->getExpression());
     }
 }

@@ -6,6 +6,9 @@ namespace Setono\CronExpressionBundle\Tests\Form\TypeGuesser;
 
 final class StubFqcn
 {
-    /** @var \Cron\CronExpression */
+    /**
+     * @var \Cron\CronExpression
+     * @phpstan-ignore property.unused
+     */
     private $property;
 }

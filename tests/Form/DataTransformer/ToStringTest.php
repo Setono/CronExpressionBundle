@@ -36,6 +36,6 @@ final class ToStringTest extends TestCase
     protected function expectedReverseTransform(mixed $input, string $expected): void
     {
         $transformer = new CronExpressionToStringTransformer();
-        $this->assertSame($expected, $transformer->reverseTransform($input)->getExpression());
+        self::assertSame($expected, $transformer->reverseTransform($input)->getExpression());
     }
 }

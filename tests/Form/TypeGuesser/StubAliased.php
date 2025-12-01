@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUnusedPrivateFieldInspection */
 
 declare(strict_types=1);
 
@@ -8,6 +8,9 @@ use Cron\CronExpression as CronExpr;
 
 final class StubAliased
 {
-    /** @var CronExpr */
+    /**
+     * @var CronExpr
+     * @phpstan-ignore property.unused
+     */
     private $property;
 }
