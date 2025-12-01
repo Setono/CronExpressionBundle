@@ -57,6 +57,7 @@ jobs:
                     - "8.2"
                     - "8.3"
                     - "8.4"
+                    - "8.5"
 
                 dependencies:
                     - "highest"
@@ -71,7 +72,9 @@ jobs:
                         symfony: "^7.0"
                 include:
                     -   php-version: '8.4'
-                        symfony: '^8.0.0'
+                        symfony: '^8.0'
+                    -   php-version: '8.5'
+                        symfony: '^8.0'
         steps:
             -   name: "Checkout"
                 uses: "actions/checkout@v4"
@@ -106,6 +109,7 @@ jobs:
                     - "8.2"
                     - "8.3"
                     - "8.4"
+                    - "8.5"
 
                 dependencies:
                     - "highest"
@@ -120,7 +124,9 @@ jobs:
                         symfony: "^7.0"
                 include:
                     -   php-version: '8.4'
-                        symfony: '^8.0.0'
+                        symfony: '^8.0'
+                    -   php-version: '8.5'
+                        symfony: '^8.0'
         steps:
             -   name: "Checkout"
                 uses: "actions/checkout@v4"
@@ -155,6 +161,7 @@ jobs:
                     - "8.2"
                     - "8.3"
                     - "8.4"
+                    - "8.5"
 
                 dependencies:
                     - "lowest"
@@ -170,7 +177,9 @@ jobs:
                         symfony: "^7.0"
                 include:
                     -   php-version: '8.4'
-                        symfony: '^8.0.0'
+                        symfony: '^8.0'
+                    -   php-version: '8.5'
+                        symfony: '^8.0'
 
         steps:
             -   name: "Checkout"
@@ -200,7 +209,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.4"
+                    - "8.5"
 
                 dependencies:
                     - "highest"
