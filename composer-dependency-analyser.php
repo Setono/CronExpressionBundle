@@ -4,6 +4,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use ShipMonk\ComposerDependencyAnalyser\Config\Configuration;
 use ShipMonk\ComposerDependencyAnalyser\Config\ErrorType;
 use Symfony\Component\TypeInfo\Type;
+use Symfony\Component\PropertyInfo\Type as LegacyType;
 
 $config = new Configuration();
 
@@ -15,6 +16,14 @@ if (class_exists(Type::class)) {
     $config->ignoreErrorsOnPackage('symfony/type-info', [ErrorType::SHADOW_DEPENDENCY]);
 } else {
     $config->ignoreUnknownClasses([Type::class]);
+}
+if (!class_exists(LegacyType::class)) {
+    $config->ignoreUnknownClasses([LegacyType::class]);
+}
+if (!function_exists('Symfony\Component\DependencyInjection\Loader\Configurator\service')) {
+    $config->ignoreUnknownFunctions([
+        'Symfony\Component\DependencyInjection\Loader\Configurator\service'
+    ]);
 }
 
 // ignore polyfill
