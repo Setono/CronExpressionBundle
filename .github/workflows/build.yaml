@@ -15,7 +15,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.2"
+                    - "8.1"
 
                 dependencies:
                     - "highest"
@@ -53,6 +53,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
+                    - "8.1"
                     - "8.2"
                     - "8.3"
                     - "8.4"
@@ -65,6 +66,9 @@ jobs:
                     - "^6.0"
                     - "^7.0"
 
+                exclude:
+                    -   php-version: "8.1"
+                        symfony: "^7.0"
                 include:
                     -   php-version: '8.4'
                         symfony: '^8.0.0'
@@ -98,6 +102,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
+                    - "8.1"
                     - "8.2"
                     - "8.3"
                     - "8.4"
@@ -110,6 +115,9 @@ jobs:
                     - "^6.0"
                     - "^7.0"
 
+                exclude:
+                    -   php-version: "8.1"
+                        symfony: "^7.0"
                 include:
                     -   php-version: '8.4'
                         symfony: '^8.0.0'
@@ -143,6 +151,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
+                    - "8.1"
                     - "8.2"
                     - "8.3"
                     - "8.4"
@@ -156,6 +165,9 @@ jobs:
                     - "^6.0"
                     - "^7.0"
 
+                exclude:
+                    -   php-version: "8.1"
+                        symfony: "^7.0"
                 include:
                     -   php-version: '8.4'
                         symfony: '^8.0.0'
@@ -167,8 +179,6 @@ jobs:
             -   name: "Setup PHP, with composer and extensions"
                 uses: "shivammathur/setup-php@v2"
                 with:
-                    coverage: "none"
-                    extensions: "${{ env.PHP_EXTENSIONS }}"
                     php-version: "${{ matrix.php-version }}"
                     tools: "flex"
 
