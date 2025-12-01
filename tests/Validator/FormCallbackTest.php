@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints\CallbackValidator;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 /**
+ * @phpstan-ignore generics.notGeneric
  * @template-extends ConstraintValidatorTestCase<CallbackValidator>
  */
 final class FormCallbackTest extends ConstraintValidatorTestCase
