@@ -94,28 +94,53 @@ jobs:
             -   name: "Run shipmonk/composer-dependency-analyser"
                 run: "vendor/bin/composer-dependency-analyser"
 
-    phpstan:
-        name: "PHPStan"
+    static-code-analysis:
+        name: "Static Code Analysis"
 
         runs-on: "ubuntu-latest"
 
+        strategy:
+            matrix:
+                php-version:
+                    - "8.1"
+                    - "8.2"
+                    - "8.3"
+                    - "8.4"
+
+                dependencies:
+                    - "highest"
+
+                symfony:
+                    - "^5.4"
+                    - "^6.0"
+                    - "^7.0"
+
+                exclude:
+                    -   php-version: "8.1"
+                        symfony: "^7.0"
+                include:
+                    -   php-version: '8.4'
+                        symfony: '^8.0.0'
         steps:
             -   name: "Checkout"
                 uses: "actions/checkout@v4"
 
-            -   name: "Install PHP with extensions"
+            -   name: "Setup PHP, with composer and extensions"
                 uses: "shivammathur/setup-php@v2"
                 with:
-                    php-version: '8.4'
                     coverage: "none"
-                    tools: "composer:v2"
+                    extensions: "${{ env.PHP_EXTENSIONS }}"
+                    php-version: "${{ matrix.php-version }}"
+                    tools: "flex"
 
-            -   name: "Install Composer dependencies (highest)"
+            -   name: "Install composer dependencies"
                 uses: "ramsey/composer-install@v3"
+                env:
+                    SYMFONY_REQUIRE: "${{ matrix.symfony }}"
                 with:
-                    dependency-versions: "highest"
+                    dependency-versions: "${{ matrix.dependencies }}"
 
-            -   name: "PHPStan"
+            -   name: "Static analysis"
                 run: "vendor/bin/phpstan --no-progress --memory-limit=1G analyse --error-format=github"
 
     unit-tests:
@@ -154,9 +179,9 @@ jobs:
             -   name: "Setup PHP, with composer and extensions"
                 uses: "shivammathur/setup-php@v2"
                 with:
-                    php-version: "${{ matrix.php-version }}"
-                    extensions: "${{ env.PHP_EXTENSIONS }}"
                     coverage: "none"
+                    extensions: "${{ env.PHP_EXTENSIONS }}"
+                    php-version: "${{ matrix.php-version }}"
                     tools: "flex"
 
             -   name: "Install composer dependencies"
