@@ -10,6 +10,7 @@ final class StubImported
 {
     /**
      * @var CronExpression
+     *
      * @phpstan-ignore property.unused
      */
     private $property;

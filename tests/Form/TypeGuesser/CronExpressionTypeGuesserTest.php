@@ -68,7 +68,7 @@ final class CronExpressionTypeGuesserTest extends TestCase
         self::assertNull($this->typeGuesser->guessPattern($class, 'property'));
     }
 
-    static private function assertCorrectGuess(?TypeGuess $res): void
+    private static function assertCorrectGuess(?TypeGuess $res): void
     {
         self::assertNotNull($res);
         self::assertSame(CronExpressionType::class, $res->getType());

@@ -8,6 +8,7 @@ final class StubWithWrongType
 {
     /**
      * @var \DateTime
+     *
      * @phpstan-ignore property.unused
      */
     private $property;

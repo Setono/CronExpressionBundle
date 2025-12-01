@@ -87,6 +87,7 @@ final class CronExpressionToStringPartsTransformer implements DataTransformerInt
 
     /**
      * @phpstan-assert array<string> $value
+     *
      * @phpstan-ignore missingType.iterableValue
      */
     private static function allString(array $value): bool

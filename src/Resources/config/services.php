@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use Setono\CronExpressionBundle\Form\TypeGuesser\CronExpressionTypeGuesser;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();

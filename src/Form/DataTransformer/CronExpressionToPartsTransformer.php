@@ -87,6 +87,7 @@ final class CronExpressionToPartsTransformer implements DataTransformerInterface
 
     /**
      * @phpstan-assert array<string, array<scalar>> $value
+     *
      * @phpstan-ignore missingType.iterableValue
      */
     private static function allArrayScalar(array $value): bool

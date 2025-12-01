@@ -70,6 +70,7 @@ final class CronExpressionType extends Type
 
     /**
      * @noinspection PhpUnusedParameterInspection
+     *
      * @phpstan-ignore return.tooWideBool
      */
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool

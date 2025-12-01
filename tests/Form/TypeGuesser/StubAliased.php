@@ -1,4 +1,6 @@
-<?php /** @noinspection PhpUnusedPrivateFieldInspection */
+<?php
+
+/** @noinspection PhpUnusedPrivateFieldInspection */
 
 declare(strict_types=1);
 
@@ -10,6 +12,7 @@ final class StubAliased
 {
     /**
      * @var CronExpr
+     *
      * @phpstan-ignore property.unused
      */
     private $property;

@@ -136,6 +136,7 @@ final class CronExpressionType extends AbstractType
     /**
      * Will create an array where the first key is 1
      * oneIndexedRange(3) will return [1 => 1, 2 => 2, 3 => 3].
+     *
      * @return array<int, int>
      */
     private function oneIndexedRange(int $end, int $start = 0): array

@@ -79,8 +79,6 @@ final class CronExpressionTest extends ConstraintValidatorTestCase
         $this->buildViolation('myMessage')->setParameter('{{ value }}', $valueAsString)->assertRaised();
     }
 
-    /**
-     */
     public static function getInvalidValues(): array
     {
         return [

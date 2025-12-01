@@ -85,7 +85,6 @@ final class CronExpressionTypeTextTest extends TypeTestCase
     }
 
     /**
-     * @param array|string|null $formData
      * @phpstan-ignore missingType.iterableValue
      */
     private function _submitFaultyData(array|string|null $formData): void
