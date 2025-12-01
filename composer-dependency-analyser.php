@@ -20,11 +20,6 @@ if (class_exists(Type::class)) {
 if (!class_exists(LegacyType::class)) {
     $config->ignoreUnknownClasses([LegacyType::class]);
 }
-if (!function_exists('Symfony\Component\DependencyInjection\Loader\Configurator\service')) {
-    $config->ignoreUnknownFunctions([
-        'Symfony\Component\DependencyInjection\Loader\Configurator\service'
-    ]);
-}
 
 // ignore polyfill
 if (version_compare(PHP_VERSION, '8.3.0', '>=')) {
