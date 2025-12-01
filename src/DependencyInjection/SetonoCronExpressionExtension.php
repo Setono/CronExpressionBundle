@@ -18,7 +18,7 @@ final class SetonoCronExpressionExtension extends Extension implements PrependEx
     public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services.xml');
+        $loader->load('services.php');
     }
 
     #[\Override]
