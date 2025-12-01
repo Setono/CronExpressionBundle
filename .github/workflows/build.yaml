@@ -91,6 +91,30 @@ jobs:
             -   name: "Run shipmonk/composer-dependency-analyser"
                 run: "vendor/bin/composer-dependency-analyser"
 
+    phpstan:
+        name: "PHPStan"
+
+        runs-on: "ubuntu-latest"
+
+        steps:
+            -   name: "Checkout"
+                uses: "actions/checkout@v4"
+
+            -   name: "Install PHP with extensions"
+                uses: "shivammathur/setup-php@v2"
+                with:
+                    php-version: '8.4'
+                    coverage: "none"
+                    tools: "composer:v2"
+
+            -   name: "Install Composer dependencies (highest)"
+                uses: "ramsey/composer-install@v3"
+                with:
+                    dependency-versions: "highest"
+
+            -   name: "PHPStan"
+                run: "vendor/bin/phpstan --no-progress --memory-limit=1G analyse --error-format=github"
+
     unit-tests:
         name: "Unit tests"
 
