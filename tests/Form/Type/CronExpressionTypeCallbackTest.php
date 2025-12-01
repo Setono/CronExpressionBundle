@@ -29,6 +29,7 @@ final class CronExpressionTypeCallbackTest extends TestCase
     protected function callValidateCronField(?string $value, bool $match): void
     {
         $mock = $this->createMock(ExecutionContextInterface::class);
+        /** @phpstan-ignore staticMethod.dynamicCall */
         $mock->expects($match ? $this->once() : $this->never())->method('addViolation')
             ->with('{{value}} is not a valid cron part', ['value' => $value])
         ;
