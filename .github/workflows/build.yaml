@@ -214,6 +214,9 @@ jobs:
                 dependencies:
                     - "highest"
 
+                symfony:
+                    - "^6.4" #old symfony/property-info
+                    - "^8.0"
         steps:
             -   name: "Checkout"
                 uses: "actions/checkout@v4"
@@ -230,6 +233,8 @@ jobs:
 
             -   name: "Install composer dependencies"
                 uses: "ramsey/composer-install@v3"
+                env:
+                    SYMFONY_REQUIRE: "${{ matrix.symfony }}"
                 with:
                     dependency-versions: "${{ matrix.dependencies }}"
 
