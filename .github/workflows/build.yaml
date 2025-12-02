@@ -214,6 +214,9 @@ jobs:
                 dependencies:
                     - "highest"
 
+                symfony:
+                    - "^6.4" #old symfony/property-info
+                    - "^8.0"
         steps:
             -   name: "Checkout"
                 uses: "actions/checkout@v4"
@@ -224,12 +227,15 @@ jobs:
                     coverage: "pcov"
                     extensions: "${{ env.PHP_EXTENSIONS }}"
                     php-version: "${{ matrix.php-version }}"
+                    tools: "flex"
 
             -   name: "Set up problem matchers for phpunit/phpunit"
                 run: "echo \"::add-matcher::${{ runner.tool_cache }}/phpunit.json\""
 
             -   name: "Install composer dependencies"
                 uses: "ramsey/composer-install@v3"
+                env:
+                    SYMFONY_REQUIRE: "${{ matrix.symfony }}"
                 with:
                     dependency-versions: "${{ matrix.dependencies }}"
 
@@ -237,6 +243,6 @@ jobs:
                 run: "vendor/bin/phpunit --coverage-clover=.build/logs/clover.xml"
 
             -   name: "Send code coverage report to Codecov.io"
-                env:
-                    CODECOV_TOKEN: "${{ secrets.CODECOV_TOKEN }}"
-                run: "bash <(curl -s https://codecov.io/bash)"
+                uses: "codecov/codecov-action@v5"
+                with:
+                    token: ${{ secrets.CODECOV_TOKEN }}
